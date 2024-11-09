@@ -1,7 +1,10 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 
-import { aws_codeconnections as codeconnections, aws_codestarconnections as codestarconnections } from "aws-cdk-lib";
+import {
+	aws_codeconnections as codeconnections,
+	aws_codestarconnections as codestarconnections
+} from "aws-cdk-lib";
 
 export class ImportedCodeConnectionStack extends cdk.Stack {
 	readonly githubCodeConnection: codeconnections.CfnConnection;
@@ -14,8 +17,12 @@ export class ImportedCodeConnectionStack extends cdk.Stack {
 			connectionName: "KaitoTokyoGitHub"
 		});
 
-		this.githubCodeStarConnection = new codestarconnections.CfnConnection(this, "GitHubCodeStarConnection", {
-			connectionName: "KaitoTokyoGitHub"
-		});
+		this.githubCodeStarConnection = new codestarconnections.CfnConnection(
+			this,
+			"GitHubCodeStarConnection",
+			{
+				connectionName: "KaitoTokyoGitHub"
+			}
+		);
 	}
 }
