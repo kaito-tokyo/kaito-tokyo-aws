@@ -1,5 +1,5 @@
 {
-	"app": "npx tsx bin/GitHubActionsSelfHostedServiceCodeProjects.ts",
+	"app": "npx tsx bin/GitHubActionsSelfHostedServiceCodeBuildProjects.ts",
 	"watch": {
 		"include": ["**"],
 		"exclude": [
