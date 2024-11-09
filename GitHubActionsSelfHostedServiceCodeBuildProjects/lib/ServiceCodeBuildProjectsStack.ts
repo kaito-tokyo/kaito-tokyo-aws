@@ -35,6 +35,7 @@ export class ServiceCodeBuildProjectsStack extends cdk.Stack {
 				resources: [
 					this.formatArn({
 						account: "586794439382",
+						region: "",
 						service: "iam",
 						resource: "role/GitHubActionsSelfHosted/*"
 					})
