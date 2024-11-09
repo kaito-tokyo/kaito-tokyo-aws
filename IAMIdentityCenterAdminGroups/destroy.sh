@@ -2,4 +2,4 @@
 
 cd "$(dirname "$0")" || exit 1
 
-cdk destroy
+npx cdk destroy
