@@ -16,8 +16,7 @@ export function createCodeBuildSource(owner: string, repo: string): codebuild.So
 			codebuild.FilterGroup.inEventOf(
 				codebuild.EventAction.WORKFLOW_JOB_QUEUED
 			).andRepositoryNameIs(repo)
-		],
-		reportBuildStatus: false
+		]
 	});
 }
 
