@@ -16,14 +16,14 @@ export class ServiceCodeBuildProjectsStack extends cdk.Stack {
 
 		this.importedCodeConnection = props.importedCodeConnection;
 
-		const source = createCodeBuildSource("kaito-tokyo", "kaito-tokyo-aws");
+		const obsChatTalkerSource = createCodeBuildSource("kaito-tokyo", "obs-chattalker");
 
 		const obsChatTalkerDeployInfraDev001CodeBuildProject = new MyCodeBuildProject(
 			this,
 			"ObsChatTalkerDeployInfraDev001CodeBuildProject",
 			{
 				projectName: "ObsChatTalkerDeployInfraDev001",
-				source,
+				source: obsChatTalkerSource,
 				importCodeConnection: this.importedCodeConnection
 			}
 		);
