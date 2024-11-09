@@ -1,0 +1,27 @@
+---
+name: "manage-service-codebuild-projects"
+
+on:
+  push:
+    branches:
+      - "main"
+
+defaults:
+  run:
+    shell: "bash"
+
+jobs:
+  ManageServiceCodeBuildProjects:
+    runs-on:
+      - "codebuild-ManageServiceCodeBuildProjects-${{ github.run_id }}-${{ github.run_attempt }}"
+      - "image:arm-lambda-nodejs20"
+      - "instance-size:1GB"
+
+    environment: "ManageServiceCodeBuildProjects_Prod"
+
+    concurrency:
+      group: "ManageServiceCodeBuildProjects_Prod"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v4"
