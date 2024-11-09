@@ -15,7 +15,7 @@ export class MainStack extends cdk.Stack {
 
 	createCodeConnectionManagedPolicy(
 		importedCodeConnection: ImportedCodeConnectionStack
-	): Iam.ManagedPolicy {
+	): iam.ManagedPolicy {
 		return new iam.ManagedPolicy(this, "CodeConnectionManagedPolicy", {
 			statements: [
 				new iam.PolicyStatement({

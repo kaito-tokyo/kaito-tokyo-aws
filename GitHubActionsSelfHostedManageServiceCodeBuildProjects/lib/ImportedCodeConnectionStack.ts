@@ -16,6 +16,7 @@ export class ImportedCodeConnectionStack extends cdk.Stack {
 		this.githubCodeConnection = new codeconnections.CfnConnection(this, "GitHubCodeConnection", {
 			connectionName: "KaitoTokyoGitHub"
 		});
+		this.githubCodeConnection.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN);
 
 		this.githubCodeStarConnection = new codestarconnections.CfnConnection(
 			this,
@@ -24,5 +25,6 @@ export class ImportedCodeConnectionStack extends cdk.Stack {
 				connectionName: "KaitoTokyoGitHub"
 			}
 		);
+		this.githubCodeStarConnection.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN);
 	}
 }
