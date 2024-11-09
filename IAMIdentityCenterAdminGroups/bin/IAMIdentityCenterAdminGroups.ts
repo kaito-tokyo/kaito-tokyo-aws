@@ -7,6 +7,8 @@ import { MainStack } from "../lib/MainStack.js";
 
 import { IdentitystoreRepository } from "../lib/IdentitystoreRepository.js";
 
+const app = new cdk.App();
+
 const env = {
 	account: "784179762749",
 	region: "us-east-1"
@@ -16,8 +18,6 @@ const identityStoreId = "d-90674974be";
 
 const identitystoreRepository = new IdentitystoreRepository(env.region, identityStoreId);
 const users = await identitystoreRepository.listUsers();
-
-const app = new cdk.App();
 
 const importedControlTowerGroups = new ImportedControlTowerGroupsStack(
 	app,
