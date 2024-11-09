@@ -2,7 +2,7 @@
 AWSTemplateFormatVersion: "2010-09-09"
 
 Resources:
-  AssumeRole:
+  CloudFormationDeployer:
     Type: "AWS::IAM::Role"
     Properties:
       RoleName: "CloudFormationDeployer"
@@ -13,7 +13,7 @@ Resources:
           - Effect: "Allow"
             Principal:
               AWS:
-                - !ImportValue "GitHubActionsSelfHostedRoleArn"
+                - !ImportValue "ObsChatTalkerDeployInfraDev001CodeBuildProjectRoleArn"
             Action: "sts:AssumeRole"
       ManagedPolicyArns:
         - "arn:aws:iam::aws:policy/CloudFormationFullAccess"
