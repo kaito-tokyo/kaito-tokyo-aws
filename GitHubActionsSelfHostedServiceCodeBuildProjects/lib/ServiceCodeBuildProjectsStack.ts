@@ -27,5 +27,10 @@ export class ServiceCodeBuildProjectsStack extends cdk.Stack {
 				importCodeConnection: this.importedCodeConnection
 			}
 		);
+
+		new cdk.CfnOutput(this, "ObsChatTalkerDeployInfraDev001CodeBuildProjectRoleArn", {
+			value: obsChatTalkerDeployInfraDev001CodeBuildProject.role!.roleArn,
+			exportName: "ObsChatTalkerDeployInfraDev001CodeBuildProjectRoleArn"
+		});
 	}
 }
