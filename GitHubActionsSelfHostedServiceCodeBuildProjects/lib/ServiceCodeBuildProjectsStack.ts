@@ -18,10 +18,14 @@ export class ServiceCodeBuildProjectsStack extends cdk.Stack {
 
 		const source = createCodeBuildSource("kaito-tokyo", "kaito-tokyo-aws");
 
-		new MyCodeBuildProject(this, "ObsChatTalkerDeployInfraDev001CodeBuildProject", {
-			projectName: "ObsChatTalkerDeployInfraDev001",
-			source,
-			importCodeConnection: this.importedCodeConnection
-		});
+		const obsChatTalkerDeployInfraDev001CodeBuildProject = new MyCodeBuildProject(
+			this,
+			"ObsChatTalkerDeployInfraDev001CodeBuildProject",
+			{
+				projectName: "ObsChatTalkerDeployInfraDev001",
+				source,
+				importCodeConnection: this.importedCodeConnection
+			}
+		);
 	}
 }

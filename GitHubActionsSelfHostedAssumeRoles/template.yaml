@@ -1,0 +1,19 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  AssumeRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: "CloudFormationDeployer"
+      Path: "/GitHubActionsSelfHosted/"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              AWS:
+                - !ImportValue "GitHubActionsSelfHostedRoleArn"
+            Action: "sts:AssumeRole"
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/CloudFormationFullAccess"
