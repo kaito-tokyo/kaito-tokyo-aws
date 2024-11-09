@@ -29,17 +29,19 @@ export class ServiceCodeBuildProjectsStack extends cdk.Stack {
 				importCodeConnection: this.importedCodeConnection
 			}
 		);
-		obsChatTalkerDeployInfraDev001CodeBuildProject.addToRolePolicy(new iam.PolicyStatement({
-			effect: iam.Effect.ALLOW,
-			resources: [
-				this.formatArn({
-					account: "586794439382",
-					service: "iam",
-					resource: "role/GitHubActionsSelfHosted/*"
-				})
-			],
-			actions: ["sts:AssumeRole"]
-		}))
+		obsChatTalkerDeployInfraDev001CodeBuildProject.addToRolePolicy(
+			new iam.PolicyStatement({
+				effect: iam.Effect.ALLOW,
+				resources: [
+					this.formatArn({
+						account: "586794439382",
+						service: "iam",
+						resource: "role/GitHubActionsSelfHosted/*"
+					})
+				],
+				actions: ["sts:AssumeRole"]
+			})
+		);
 
 		new cdk.CfnOutput(this, "ObsChatTalkerDeployInfraDev001CodeBuildProjectRoleArn", {
 			value: obsChatTalkerDeployInfraDev001CodeBuildProject.role!.roleArn,
