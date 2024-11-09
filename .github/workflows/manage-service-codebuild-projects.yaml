@@ -26,6 +26,9 @@ jobs:
       - name: "Checkout"
         uses: "actions/checkout@v4"
 
+      - name: "Install dependencies"
+        run: "npm ci --workspace=github_actions_self_hosted_service_code_projects"
+
       - name: "Deploy service CodeBuild projects"
         working-directory: "GitHubActionsSelfHostedServiceCodeProjects"
         run: "./update.sh"
