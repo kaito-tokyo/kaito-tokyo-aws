@@ -7,7 +7,7 @@ on:
       - "main"
     paths:
       - "GitHubActionsSelfHostedAssumeRoles/**"
-      - "manage-assume-roles.yaml"
+      - ".github/workflows/manage-assume-roles.yaml"
 
 defaults:
   run:
