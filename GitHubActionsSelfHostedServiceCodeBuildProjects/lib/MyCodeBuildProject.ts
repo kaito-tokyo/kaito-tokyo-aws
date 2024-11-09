@@ -55,7 +55,6 @@ export class MyCodeBuildProject extends codebuild.Project {
 				resources: [
 					this.stack.formatArn({
 						account: this.stack.account,
-						region: this.stack.region,
 						service: "iam",
 						resource: "role/cdk-*"
 					})
