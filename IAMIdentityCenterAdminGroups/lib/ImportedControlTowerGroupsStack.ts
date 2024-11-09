@@ -8,6 +8,8 @@ interface ImportedControlTowerGroupsStackProps extends cdk.StackProps {
 }
 
 export class ImportedControlTowerGroupsStack extends cdk.Stack {
+	readonly identityStoreId: string;
+
 	readonly accountFactory: identitystore.CfnGroup;
 	readonly logArchiveViewers: identitystore.CfnGroup;
 	readonly serviceCatalogAdmins: identitystore.CfnGroup;
@@ -21,6 +23,7 @@ export class ImportedControlTowerGroupsStack extends cdk.Stack {
 		super(scope, id, props);
 
 		const { identityStoreId } = props;
+		this.identityStoreId = identityStoreId;
 
 		this.accountFactory = new identitystore.CfnGroup(this, "AccountFactory", {
 			displayName: "AWSAccountFactory",
