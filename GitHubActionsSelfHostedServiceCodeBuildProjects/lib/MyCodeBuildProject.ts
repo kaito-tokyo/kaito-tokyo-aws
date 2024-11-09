@@ -52,13 +52,7 @@ export class MyCodeBuildProject extends codebuild.Project {
 		this.addToRolePolicy(
 			new iam.PolicyStatement({
 				effect: iam.Effect.ALLOW,
-				resources: [
-					this.stack.formatArn({
-						account: this.stack.account,
-						service: "iam",
-						resource: "role/cdk-*"
-					})
-				],
+				resources: ["*"],
 				actions: ["sts:AssumeRole"],
 				conditions: {
 					StringEquals: {
