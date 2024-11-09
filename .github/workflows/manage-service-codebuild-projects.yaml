@@ -24,6 +24,8 @@ jobs:
       - "image:arm-lambda-nodejs20"
       - "instance-size:1GB"
 
+    environment: "ManageServiceCodeBuildProjects_Prod"
+
     steps:
       - name: "Checkout"
         uses: "actions/checkout@v4"
