@@ -7,6 +7,7 @@ aws cloudformation create-stack-set \
   --template-body="$(<ObsChatTalkerAssumeRolesDev001.yaml)" \
   --capabilities=CAPABILITY_NAMED_IAM \
   --permission-model=SERVICE_MANAGED \
+  --auto-deployment=Enabled=true,RetainStacksOnAccountRemoval=false \
   --call-as=DELEGATED_ADMIN
 
 # aws cloudformation create-stack-instances \
