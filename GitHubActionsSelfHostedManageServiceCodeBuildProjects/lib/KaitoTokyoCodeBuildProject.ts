@@ -24,7 +24,17 @@ export class KaitoTokyoCodeBuildProject extends codebuild.Project {
 			new iam.PolicyStatement({
 				effect: iam.Effect.ALLOW,
 				resources: ["arn:aws:iam::*:role/cdk-*"],
-				actions: ["iam:AssumeRole"]
+				actions: ["sts:AssumeRole"],
+				conditions: {
+					StringEquals: {
+						"iam:ResourceTag/aws-cdk:bootstrap-role": [
+							"image-publishing",
+							"file-publishing",
+							"deploy",
+							"lookup"
+						]
+					}
+				}
 			})
 		);
 
