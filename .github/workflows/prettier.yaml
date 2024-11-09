@@ -1,0 +1,37 @@
+---
+name: "prettier"
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: "${{ github.ref != 'refs/heads/main' }}"
+
+defaults:
+  run:
+    shell: "bash"
+
+jobs:
+  Prettier:
+    runs-on: "ubuntu-24.04"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v4"
+
+      - name: "Setup Node.js"
+        uses: "actions/setup-node@v2"
+        with:
+          node-version: "20"
+
+      - name: "Install Dependencies"
+        run: "npm ci"
+
+      - name: "Run Prettier"
+        run: "npx prettier --check ."
