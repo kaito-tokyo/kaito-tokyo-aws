@@ -1,0 +1,35 @@
+---
+    name: "manage-service-codebuild-projects"
+    
+    on:
+      push:
+        branches:
+          - "main"
+        paths:
+          - "GitHubActionsSelfHostedServiceCodeBuildProjects/**"
+          - ".github/workflows/manage-service-codebuild-projects.yaml"
+    
+    defaults:
+      run:
+        shell: "bash"
+    
+    jobs:
+      ManageServiceCodeBuildProjectsProd001:
+        runs-on:
+          - "codebuild-AssumeRoleManagerProd001-${{ github.run_id }}-${{ github.run_attempt }}"
+          - "image:arm-lambda-nodejs20"
+          - "instance-size:1GB"
+    
+        environment: "ManageAssumeRoles_Prod"
+    
+        concurrency:
+          group: "ManageAssumeRoles_Prod"
+    
+        steps:
+          - name: "Checkout"
+            uses: "actions/checkout@v4"
+    
+          - name: "Update Stack sets"
+            working-directory: "GitHubActionsSelfHostedAssumeRoles"
+            run: "./update.sh"
+    

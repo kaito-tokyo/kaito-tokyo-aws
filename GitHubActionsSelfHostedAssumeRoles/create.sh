@@ -4,7 +4,7 @@ cd "$(dirname "$0")" || exit 1
 
 aws cloudformation create-stack-set \
   --stack-set-name=GitHubActionsSelfHostedObsChatTalkerAssumeRolesDev001 \
-  --template-body="$(<ObsChatTalkerDeployInfraAssumeRoleDev001.yaml)" \
+  --template-body="$(<ObsChatTalkerAssumeRolesDev001.yaml)" \
   --capabilities=CAPABILITY_NAMED_IAM \
   --permission-model=SERVICE_MANAGED \
   --call-as=DELEGATED_ADMIN
