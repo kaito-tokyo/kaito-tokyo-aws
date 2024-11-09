@@ -1,7 +1,7 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 
-import { aws_identitystore as identitystore } from 'aws-cdk-lib';
+import { aws_identitystore as identitystore } from "aws-cdk-lib";
 
 interface ImportedControlTowerGroupsStackProps extends cdk.StackProps {
 	readonly identityStoreId: string;
