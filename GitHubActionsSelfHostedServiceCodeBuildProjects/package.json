@@ -1,5 +1,5 @@
 {
-	"name": "github_actions_self_hosted_service_code_projects",
+	"name": "github_actions_self_hosted_service_codebuild_projects",
 	"version": "0.1.0",
 	"devDependencies": {
 		"@types/node": "20.6.0",
