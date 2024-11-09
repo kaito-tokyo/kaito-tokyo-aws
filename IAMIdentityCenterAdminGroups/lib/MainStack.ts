@@ -16,7 +16,7 @@ export class MainStack extends cdk.Stack {
 		const { importedControlTowerGroups } = props;
 
 		new identitystore.CfnGroupMembership(this, "UmireonControlTowerAdmins", {
-			groupId: importedControlTowerGroups.controlTowerAdmins.ref,
+			groupId: importedControlTowerGroups.controlTowerAdmins.attrGroupId,
 			identityStoreId: importedControlTowerGroups.identityStoreId,
 			memberId: {
 				userId: "748804e8-70e1-708a-56f1-820f4ba90171"
