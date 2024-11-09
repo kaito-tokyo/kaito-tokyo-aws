@@ -1,5 +1,6 @@
 {
 	"name": "kaito-tokyo-aws",
+	"private": true,
 	"version": "1.0.0",
 	"description": "Infrastructure as code of kaito.tokyo on Amazon Web Services",
 	"scripts": {
@@ -7,11 +8,12 @@
 	},
 	"author": "Kaito Udagawa",
 	"license": "MIT",
-	"private": true,
-	"workspaces": [
-		"IAMIdentityCenterAdminGroups"
-	],
+	"type": "module",
 	"devDependencies": {
 		"prettier": "^3.3.3"
-	}
+	},
+	"workspaces": [
+		"IAMIdentityCenterAdminGroups",
+		"GitHubActionsSelfHostedManageServiceCodeBuildProjects",
+	]
 }
