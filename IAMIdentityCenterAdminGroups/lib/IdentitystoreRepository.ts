@@ -17,16 +17,17 @@ export class IdentitystoreRepository {
 		let users: User[] = [];
 		let NextToken: string | undefined;
 		do {
-			const response = await this.client.send(new ListUsersCommand({
+			const response = await this.client.send(
+				new ListUsersCommand({
 					IdentityStoreId: this.identityStoreId,
 					MaxResults: 1,
 					NextToken
-			}));
+				})
+			);
 			NextToken = response.NextToken;
-			users = [...users, ...response.Users ?? []];
+			users = [...users, ...(response.Users ?? [])];
 		} while (NextToken);
 
 		return users;
 	}
 }
-
