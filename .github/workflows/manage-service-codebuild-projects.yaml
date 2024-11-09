@@ -1,5 +1,5 @@
 ---
-name: "prettier"
+name: "manage-service-codebuild-projects"
 
 on:
   push:
