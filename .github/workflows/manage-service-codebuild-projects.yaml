@@ -6,10 +6,6 @@ on:
     branches:
       - "main"
 
-concurrency:
-  group: "${{ github.workflow }}-${{ github.ref }}"
-  cancel-in-progress: "${{ github.ref != 'refs/heads/main' }}"
-
 defaults:
   run:
     shell: "bash"
@@ -22,6 +18,9 @@ jobs:
       - "instance-size:1GB"
 
     environment: "ManageServiceCodeBuildProjects_Prod"
+
+    concurrency:
+      group: "ManageServiceCodeBuildProjects_Prod"
 
     steps:
       - name: "Checkout"
