@@ -27,6 +27,8 @@ export class AssumeRoleManagerStack extends cdk.Stack {
 			importCodeConnection: this.importedCodeConnection
 		});
 
-		project.role!.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName("AWSCloudFormationFullAccess"));
+		project.role!.addManagedPolicy(
+			iam.ManagedPolicy.fromAwsManagedPolicyName("AWSCloudFormationFullAccess")
+		);
 	}
 }
