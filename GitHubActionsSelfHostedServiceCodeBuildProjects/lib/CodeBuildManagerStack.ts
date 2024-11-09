@@ -1,8 +1,6 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 
-import { aws_codebuild as codebuild, aws_iam as iam } from "aws-cdk-lib";
-
 import { ImportedCodeConnectionStack } from "./ImportedCodeConnectionStack.js";
 import { createCodeBuildSource, MyCodeBuildProject } from "./MyCodeBuildProject.js";
 
