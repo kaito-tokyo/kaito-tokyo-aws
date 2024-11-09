@@ -14,7 +14,20 @@ export class KaitoTokyoCodeBuildProject extends codebuild.Project {
 
 		this.codeConnectionManagedPolicy = props.codeConnectionManagedPolicy;
 
-		this.role!.addManagedPolicy(this.codeConnectionManagedPolicy);
+		const { role } = this;
+		if (!role) {
+			throw new Error("Role is not defined");
+		}
+		role.addManagedPolicy(this.codeConnectionManagedPolicy);
+
+		this.addToRolePolicy(
+			new iam.PolicyStatement({
+				effect: iam.Effect.ALLOW,
+				resources: ["arn:aws:iam::*:role/cdk-*"],
+				actions: ["iam:AssumeRole"]
+			})
+		);
+
 		this.node.addDependency(this.codeConnectionManagedPolicy);
 	}
 }
