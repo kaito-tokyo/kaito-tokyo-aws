@@ -6,8 +6,8 @@ on:
     branches:
       - "main"
     paths:
-      - "GitHubActionsSelfHostedServiceCodeBuildProjects/**"
-      - ".github/workflows/manage-service-codebuild-projects.yaml"
+      - "GitHubActionsSelfHostedAssumeRoles/**"
+      - "manage-assume-roles.yaml"
 
 defaults:
   run:
