@@ -58,14 +58,10 @@ export class MainStack extends cdk.Stack {
 		);
 		const source = this.createSource("kaito-tokyo-aws");
 
-		new KaitoTokyoCodeBuildProject(
-			this,
-			"ObsChatTalkerDeployInfraDev001Project",
-			{
-				projectName: "ObsChatTalkerDeployInfraDev001",
-				source,
-				codeConnectionManagedPolicy
-			}
-		);
+		new KaitoTokyoCodeBuildProject(this, "ObsChatTalkerDeployInfraDev001Project", {
+			projectName: "ObsChatTalkerDeployInfraDev001",
+			source,
+			codeConnectionManagedPolicy
+		});
 	}
 }

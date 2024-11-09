@@ -14,7 +14,7 @@
 	},
 	"workspaces": [
 		"GitHubActionsSelfHostedManageServiceCodeBuildProjects",
-		"GitHubActionsSelfHostedServiceCodeBuildProjects".
+		"GitHubActionsSelfHostedServiceCodeBuildProjects",
 		"IAMIdentityCenterAdminGroups"
 	]
 }
