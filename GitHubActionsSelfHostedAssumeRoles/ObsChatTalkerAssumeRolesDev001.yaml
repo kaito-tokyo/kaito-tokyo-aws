@@ -13,7 +13,7 @@ Resources:
           - Effect: "Allow"
             Principal:
               AWS:
-                - "arn:aws:iam::147997151289:role/GitHubActionsSelfHostedSe-ObsChatTalkerDeployInfraD-RDP6mwpI7kiH"
+                - !ImportValue "ObsChatTalkerDeployInfraDev001CodeBuildProjectRoleArn"
             Action: "sts:AssumeRole"
       ManagedPolicyArns:
         - "arn:aws:iam::aws:policy/AWSCloudFormationFullAccess"
