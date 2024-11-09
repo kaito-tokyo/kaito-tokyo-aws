@@ -32,7 +32,7 @@ export class AssumeRoleManagerStack extends cdk.Stack {
 		);
 
 		project.role!.addManagedPolicy(
-			iam.ManagedPolicy.fromAwsManagedPolicyName("AWSConfigRoleForOrganizations")
+			iam.ManagedPolicy.fromAwsManagedPolicyName("AWSOrganizationsReadOnlyAccess")
 		);
 	}
 }
