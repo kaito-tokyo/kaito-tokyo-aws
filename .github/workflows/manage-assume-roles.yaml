@@ -1,5 +1,5 @@
 ---
-name: "manage-service-codebuild-projects"
+name: "manage-assume-roles"
 
 on:
   push:
