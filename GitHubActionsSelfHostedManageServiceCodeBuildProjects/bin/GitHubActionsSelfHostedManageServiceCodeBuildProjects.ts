@@ -20,7 +20,7 @@ const importedCodeConnectionProd001 = new ImportedCodeConnectionStack(
 	}
 );
 
-new MainStack(app, "GitHubActionsSelfHostedManageServiceCodeBuildProjectsStack", {
+new MainStack(app, "GitHubActionsSelfHostedManageServiceCodeBuildProjectsMainStack", {
 	env: prod001,
 	importedCodeConnection: importedCodeConnectionProd001
 });
