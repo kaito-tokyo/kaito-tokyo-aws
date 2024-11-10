@@ -16,6 +16,6 @@
 		"GitHubActionsSelfHostedManageServiceCodeBuildProjects",
 		"GitHubActionsSelfHostedServiceCodeBuildProjects",
 		"IAMIdentityCenterAdminGroups",
-		"Route53Zones"
+		"Infrastructure"
 	]
 }
