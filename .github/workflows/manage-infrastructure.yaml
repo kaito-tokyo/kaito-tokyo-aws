@@ -1,0 +1,41 @@
+---
+name: "manage-infrastructure"
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "Infrastructure/**"
+      - ".github/workflows/manage-infrastructure.yaml"
+
+defaults:
+  run:
+    shell: "bash"
+
+jobs:
+  ManageInfrastructureProd001:
+    runs-on:
+      - "codebuild-InfrastructureManagerProd001-${{ github.run_id }}-${{ github.run_attempt }}"
+      - "image:arm-lambda-nodejs20"
+      - "instance-size:1GB"
+
+    environment: "ManageInfrastructure_Prod"
+
+    concurrency:
+      group: "ManageInfrastructure_Prod"
+      cancel-in-progress: true
+
+    steps:
+      - name: "Fix npm"
+        run: "mkdir -p /tmp/opt/npm/lib"
+
+      - name: "Checkout"
+        uses: "actions/checkout@v4"
+
+      - name: "Install dependencies"
+        run: "npm ci --workspace=infrastructure"
+
+      - name: "Manage infrastructure"
+        working-directory: "GitHubActionsSelfHostedServiceCodeBuildProjects"
+        run: "./update.sh"
