@@ -7,10 +7,12 @@ import { MainStack } from "../lib/MainStack.js";
 
 import { IdentitystoreRepository } from "../lib/IdentitystoreRepository.js";
 
+import { Management } from "account_ids";
+
 const app = new cdk.App();
 
 const env = {
-	account: "784179762749",
+	account: Management,
 	region: "us-east-1"
 };
 

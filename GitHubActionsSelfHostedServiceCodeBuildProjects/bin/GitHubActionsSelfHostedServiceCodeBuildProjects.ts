@@ -6,18 +6,18 @@ import { ImportedCodeConnectionStack } from "../lib/ImportedCodeConnectionStack.
 import { ServiceCodeBuildProjectsStack } from "../lib/ServiceCodeBuildProjectsStack.js";
 import { CodeBuildManagerStack } from "../lib/CodeBuildManagerStack.js";
 
-const app = new cdk.App();
+import { GitHubSelfHostedProd001 } from "account_ids";
 
-const prod001 = {
-	account: "147997151289",
-	region: "us-east-1"
-};
+const app = new cdk.App();
 
 const importedCodeConnectionProd001 = new ImportedCodeConnectionStack(
 	app,
 	"GitHubActionsSelfHostedServiceCodeBuildProjectsImportedCodeConnectionStack",
 	{
-		env: prod001
+		env: {
+			account: GitHubSelfHostedProd001,
+			region: "us-east-1"
+		}
 	}
 );
 
@@ -25,7 +25,10 @@ new CodeBuildManagerStack(
 	app,
 	"GitHubActionsSelfHostedServiceCodeBuildProjectsCodeBuildManagerStack",
 	{
-		env: prod001,
+		env: {
+			account: GitHubSelfHostedProd001,
+			region: "us-east-1"
+		},
 		importedCodeConnection: importedCodeConnectionProd001,
 		shortName: "Prod001"
 	}
@@ -35,7 +38,10 @@ new ServiceCodeBuildProjectsStack(
 	app,
 	"GitHubActionsSelfHostedServiceCodeBuildProjectsServiceCodeBuildProjectsStack",
 	{
-		env: prod001,
+		env: {
+			account: GitHubSelfHostedProd001,
+			region: "us-east-1"
+		},
 		importedCodeConnection: importedCodeConnectionProd001
 	}
 );
