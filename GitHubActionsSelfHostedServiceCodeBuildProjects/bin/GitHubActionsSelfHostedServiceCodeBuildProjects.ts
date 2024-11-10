@@ -5,7 +5,6 @@ import * as cdk from "aws-cdk-lib";
 import { ImportedCodeConnectionStack } from "../lib/ImportedCodeConnectionStack.js";
 import { ServiceCodeBuildProjectsStack } from "../lib/ServiceCodeBuildProjectsStack.js";
 import { CodeBuildManagerStack } from "../lib/CodeBuildManagerStack.js";
-import { AssumeRoleManagerStack } from "../lib/AssumeRoleManagerStack.js";
 
 const app = new cdk.App();
 
@@ -25,16 +24,6 @@ const importedCodeConnectionProd001 = new ImportedCodeConnectionStack(
 new CodeBuildManagerStack(
 	app,
 	"GitHubActionsSelfHostedServiceCodeBuildProjectsCodeBuildManagerStack",
-	{
-		env: prod001,
-		importedCodeConnection: importedCodeConnectionProd001,
-		shortName: "Prod001"
-	}
-);
-
-new AssumeRoleManagerStack(
-	app,
-	"GitHubActionsSelfHostedServiceCodeBuildProjectsAssumeRoleManagerStack",
 	{
 		env: prod001,
 		importedCodeConnection: importedCodeConnectionProd001,
