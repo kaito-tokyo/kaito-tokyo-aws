@@ -2,4 +2,4 @@
 
 cd "$(dirname "$0")" || exit 1
 
-npx cdk deploy GitHubActionsSelfHostedServiceCodeBuildProjectsCodeBuildManagerStack
+npx aws-cdk deploy GitHubActionsSelfHostedServiceCodeBuildProjectsCodeBuildManagerStack

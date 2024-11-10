@@ -2,4 +2,4 @@
 
 cd "$(dirname "$0")" || exit 1
 
-npx cdk bootstrap
+npx aws-cdk bootstrap
