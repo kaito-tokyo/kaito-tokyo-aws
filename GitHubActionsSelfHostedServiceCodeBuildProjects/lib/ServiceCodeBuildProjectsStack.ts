@@ -18,35 +18,19 @@ export class ServiceCodeBuildProjectsStack extends cdk.Stack {
 
 		this.importedCodeConnection = props.importedCodeConnection;
 
+		const kaitoTokyoAwsSource = createCodeBuildSource("kaito-tokyo", "kaito-tokyo-aws");
 		const obsChatTalkerSource = createCodeBuildSource("kaito-tokyo", "obs-chattalker");
 
-		const obsChatTalkerDeployInfraDev001CodeBuildProject = new MyCodeBuildProject(
-			this,
-			"ObsChatTalkerDeployInfraDev001CodeBuildProject",
-			{
-				projectName: "ObsChatTalkerDeployInfraDev001",
-				source: obsChatTalkerSource,
-				importCodeConnection: this.importedCodeConnection
-			}
-		);
-		obsChatTalkerDeployInfraDev001CodeBuildProject.addToRolePolicy(
-			new iam.PolicyStatement({
-				effect: iam.Effect.ALLOW,
-				resources: [
-					this.formatArn({
-						account: "586794439382",
-						region: "",
-						service: "iam",
-						resource: "role/GitHubActionsSelfHosted/*"
-					})
-				],
-				actions: ["sts:AssumeRole"]
-			})
-		);
+		new MyCodeBuildProject(this, "InfrastructureManagerProd001Project", {
+			projectName: "InfrastructureManagerProd001",
+			source: kaitoTokyoAwsSource,
+			importCodeConnection: this.importedCodeConnection
+		});
 
-		new cdk.CfnOutput(this, "ObsChatTalkerDeployInfraDev001CodeBuildProjectRoleArn", {
-			value: obsChatTalkerDeployInfraDev001CodeBuildProject.role!.roleArn,
-			exportName: "ObsChatTalkerDeployInfraDev001CodeBuildProjectRoleArn"
+		new MyCodeBuildProject(this, "ObsChatTalkerDeployInfraDev001CodeBuildProject", {
+			projectName: "ObsChatTalkerDeployInfraDev001",
+			source: obsChatTalkerSource,
+			importCodeConnection: this.importedCodeConnection
 		});
 	}
 }
