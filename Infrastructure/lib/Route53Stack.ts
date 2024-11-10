@@ -15,7 +15,7 @@ export class Route53Stack extends cdk.Stack {
 
 		const apidevObsChatTalkerZoneDelegationRole = new iam.Role(
 			this,
-			"ApiDevObsChatTalkerZoneDelegationRole",
+			"ApidevObsChatTalkerZoneDelegationRole",
 			{
 				path: "/route53-delegation/",
 				roleName: `apidev-${ObsChatTalkerDev001}`,
