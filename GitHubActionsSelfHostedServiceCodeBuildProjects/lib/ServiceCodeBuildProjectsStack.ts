@@ -28,7 +28,7 @@ export class ServiceCodeBuildProjectsStack extends cdk.Stack {
 		});
 
 		new MyCodeBuildProject(this, "ObsChatTalkerInfraDeployerDev001Project", {
-			projectName: "ObsChatTalkerDeployInfraDev001",
+			projectName: "ObsChatTalkerInfraDeployerDev001",
 			source: obsChatTalkerSource,
 			importCodeConnection: this.importedCodeConnection
 		});
