@@ -5,9 +5,6 @@ on:
   push:
     branches:
       - "main"
-    paths:
-      - "GitHubActionsSelfHostedServiceCodeBuildProjects/**"
-      - ".github/workflows/manage-service-codebuild-projects.yaml"
 
 defaults:
   run:

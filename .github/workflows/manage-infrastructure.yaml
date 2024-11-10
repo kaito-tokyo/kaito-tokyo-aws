@@ -5,9 +5,6 @@ on:
   push:
     branches:
       - "main"
-    paths:
-      - "Infrastructure/**"
-      - ".github/workflows/manage-infrastructure.yaml"
 
 defaults:
   run:
@@ -37,5 +34,5 @@ jobs:
         run: "npm ci --workspace=infrastructure"
 
       - name: "Manage infrastructure"
-        working-directory: "GitHubActionsSelfHostedServiceCodeBuildProjects"
+        working-directory: "Infrastructure"
         run: "./update.sh"
