@@ -6,14 +6,14 @@ import { EditorPermissionsStack } from "../lib/EditorPermissionsStack.js";
 import { ImportedControlTowerIdentitiesStack } from "../lib/ImportedControlTowerIdentitiesStack.js";
 
 import {
-  ManagementAccountId,
+  managementAccountId,
   identityStoreId,
-} from "k8s-manifests-aws-commonparameters";
+} from "kaito-tokyo-aws-common-parameters";
 import { IdentityStoreRepository } from "../lib/IdentitystoreRepository.js";
 
 const app = new cdk.App();
 
-if (process.env["CDK_DEFAULT_ACCOUNT"] !== ManagementAccountId) {
+if (process.env["CDK_DEFAULT_ACCOUNT"] !== managementAccountId) {
   throw new Error("This stack must be deployed to the management account");
 }
 
@@ -31,7 +31,7 @@ const importedControlTowerIdentities = new ImportedControlTowerIdentitiesStack(
   "ImportedControlTowerIdentitiesStack",
   {
     env: {
-      account: ManagementAccountId,
+      account: managementAccountId,
       region: "ap-northeast-1",
     },
     identityStoreId,
@@ -40,7 +40,7 @@ const importedControlTowerIdentities = new ImportedControlTowerIdentitiesStack(
 
 new AdminGroupMembershipsStack(app, "AdminGroupMembershipsStack", {
   env: {
-    account: ManagementAccountId,
+    account: managementAccountId,
     region: "ap-northeast-1",
   },
   identityStoreId,
@@ -50,7 +50,7 @@ new AdminGroupMembershipsStack(app, "AdminGroupMembershipsStack", {
 
 new EditorPermissionsStack(app, "EditorPermissionsStack", {
   env: {
-    account: ManagementAccountId,
+    account: managementAccountId,
     region: "ap-northeast-1",
   },
   importedControlTowerIdentities,
