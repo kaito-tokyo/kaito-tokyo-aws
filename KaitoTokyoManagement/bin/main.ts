@@ -18,7 +18,7 @@ if (process.env["CDK_DEFAULT_ACCOUNT"] !== managementAccountId) {
 }
 
 const identityStoreRepository = new IdentityStoreRepository({
-  region: "ap-northeast-1",
+  region: "us-east-1",
   identityStoreId,
 });
 
@@ -32,7 +32,7 @@ const importedControlTowerIdentities = new ImportedControlTowerIdentitiesStack(
   {
     env: {
       account: managementAccountId,
-      region: "ap-northeast-1",
+      region: "us-east-1",
     },
     identityStoreId,
   },
@@ -41,7 +41,7 @@ const importedControlTowerIdentities = new ImportedControlTowerIdentitiesStack(
 new AdminGroupMembershipsStack(app, "AdminGroupMembershipsStack", {
   env: {
     account: managementAccountId,
-    region: "ap-northeast-1",
+    region: "us-east-1",
   },
   identityStoreId,
   importedControlTowerIdentities,
@@ -51,7 +51,7 @@ new AdminGroupMembershipsStack(app, "AdminGroupMembershipsStack", {
 new EditorPermissionsStack(app, "EditorPermissionsStack", {
   env: {
     account: managementAccountId,
-    region: "ap-northeast-1",
+    region: "us-east-1",
   },
   importedControlTowerIdentities,
   users,
