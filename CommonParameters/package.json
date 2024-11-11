@@ -1,5 +1,5 @@
 {
-	"name": "account_ids",
+	"name": "kaito-tokyo-aws-common-parameters",
 	"private": true,
 	"version": "0.1.0",
 	"main": "index.js",

@@ -13,10 +13,11 @@
 		"prettier": "^3.3.3"
 	},
 	"workspaces": [
-		"AccountIds",
+		"CommonParameters",
 		"GitHubActionsSelfHostedManageServiceCodeBuildProjects",
 		"GitHubActionsSelfHostedServiceCodeBuildProjects",
 		"IAMIdentityCenterAdminGroups",
-		"Infrastructure"
+		"Infrastructure",
+		"KaitoTokyoManagement"
 	]
 }
