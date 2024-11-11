@@ -6,16 +6,12 @@ import { ImportedControlTowerIdentitiesStack } from "./ImportedControlTowerIdent
 import type { User } from "@aws-sdk/client-identitystore";
 
 interface EditorPermissionsStackProps extends cdk.StackProps {
-  readonly importedControlTowerIdentities: ImportedControlTowerIdentitiesStack;
-  readonly users: User[];
+	readonly importedControlTowerIdentities: ImportedControlTowerIdentitiesStack;
+	readonly users: User[];
 }
 
 export class EditorPermissionsStack extends cdk.Stack {
-  constructor(
-    scope: Construct,
-    id: string,
-    props: EditorPermissionsStackProps,
-  ) {
-    super(scope, id, props);
-  }
+	constructor(scope: Construct, id: string, props: EditorPermissionsStackProps) {
+		super(scope, id, props);
+	}
 }

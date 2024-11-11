@@ -1,61 +1,61 @@
 {
-  "AccountFactory": {
-    "GroupId": "94784478-9031-70d9-1927-dfb038bb6d1a",
-    "IdentityStoreId": "d-90674974be"
-  },
-  "AuditAccountAdmins": {
-    "GroupId": "74b884f8-7011-704b-cfa0-a536cde5f3f7",
-    "IdentityStoreId": "d-90674974be"
-  },
-  "ControlTowerAdmins": {
-    "GroupId": "e418d408-90b1-7050-a674-33d063584a88",
-    "IdentityStoreId": "d-90674974be"
-  },
-  "LogArchiveAdmins": {
-    "GroupId": "a4483418-e031-708e-e246-1c9a9df9e6cb",
-    "IdentityStoreId": "d-90674974be"
-  },
-  "LogArchiveViewers": {
-    "GroupId": "64187478-2071-70f5-41b1-11f55d5d7e81",
-    "IdentityStoreId": "d-90674974be"
-  },
-  "SecurityAuditors": {
-    "GroupId": "64782478-6091-7047-308b-b0ff17d4f730",
-    "IdentityStoreId": "d-90674974be"
-  },
-  "SecurityAuditPowerUsers": {
-    "GroupId": "2418a4a8-d0d1-70f4-3f42-04d07e86900c",
-    "IdentityStoreId": "d-90674974be"
-  },
-  "ServiceCatalogAdmins": {
-    "GroupId": "7458d468-8091-70b4-0b86-ac8a586acb8f",
-    "IdentityStoreId": "d-90674974be"
-  },
-  "SSOInstance": {
-    "InstanceArn": "arn:aws:sso:::instance/ssoins-722348c2092582ca"
-  },
-  "AdministratorAccess": {
-    "InstanceArn": "arn:aws:sso:::instance/ssoins-722348c2092582ca",
-    "PermissionSetArn": "arn:aws:sso:::permissionSet/ssoins-722348c2092582ca/ps-c903b477199128a2"
-  },
-  "OrganizationFullAccess": {
-    "InstanceArn": "arn:aws:sso:::instance/ssoins-722348c2092582ca",
-    "PermissionSetArn": "arn:aws:sso:::permissionSet/ssoins-722348c2092582ca/ps-8c29bf9ce905bdf7"
-  },
-  "PowerUserAccess": {
-    "InstanceArn": "arn:aws:sso:::instance/ssoins-722348c2092582ca",
-    "PermissionSetArn": "arn:aws:sso:::permissionSet/ssoins-722348c2092582ca/ps-e2aea707f660136f"
-  },
-  "ReadOnlyAccess": {
-    "InstanceArn": "arn:aws:sso:::instance/ssoins-722348c2092582ca",
-    "PermissionSetArn": "arn:aws:sso:::permissionSet/ssoins-722348c2092582ca/ps-df10e31467e82686"
-  },
-  "ServiceCatalogAdminFullAccess": {
-    "InstanceArn": "arn:aws:sso:::instance/ssoins-722348c2092582ca",
-    "PermissionSetArn": "arn:aws:sso:::permissionSet/ssoins-722348c2092582ca/ps-8ff9697080e53bb9"
-  },
-  "ServiceCatalogEndUserAccess": {
-    "InstanceArn": "arn:aws:sso:::instance/ssoins-722348c2092582ca",
-    "PermissionSetArn": "arn:aws:sso:::permissionSet/ssoins-722348c2092582ca/ps-441146b78cb59c4e"
-  }
+	"AccountFactory": {
+		"GroupId": "94784478-9031-70d9-1927-dfb038bb6d1a",
+		"IdentityStoreId": "d-90674974be"
+	},
+	"AuditAccountAdmins": {
+		"GroupId": "74b884f8-7011-704b-cfa0-a536cde5f3f7",
+		"IdentityStoreId": "d-90674974be"
+	},
+	"ControlTowerAdmins": {
+		"GroupId": "e418d408-90b1-7050-a674-33d063584a88",
+		"IdentityStoreId": "d-90674974be"
+	},
+	"LogArchiveAdmins": {
+		"GroupId": "a4483418-e031-708e-e246-1c9a9df9e6cb",
+		"IdentityStoreId": "d-90674974be"
+	},
+	"LogArchiveViewers": {
+		"GroupId": "64187478-2071-70f5-41b1-11f55d5d7e81",
+		"IdentityStoreId": "d-90674974be"
+	},
+	"SecurityAuditors": {
+		"GroupId": "64782478-6091-7047-308b-b0ff17d4f730",
+		"IdentityStoreId": "d-90674974be"
+	},
+	"SecurityAuditPowerUsers": {
+		"GroupId": "2418a4a8-d0d1-70f4-3f42-04d07e86900c",
+		"IdentityStoreId": "d-90674974be"
+	},
+	"ServiceCatalogAdmins": {
+		"GroupId": "7458d468-8091-70b4-0b86-ac8a586acb8f",
+		"IdentityStoreId": "d-90674974be"
+	},
+	"SSOInstance": {
+		"InstanceArn": "arn:aws:sso:::instance/ssoins-722348c2092582ca"
+	},
+	"AdministratorAccess": {
+		"InstanceArn": "arn:aws:sso:::instance/ssoins-722348c2092582ca",
+		"PermissionSetArn": "arn:aws:sso:::permissionSet/ssoins-722348c2092582ca/ps-c903b477199128a2"
+	},
+	"OrganizationFullAccess": {
+		"InstanceArn": "arn:aws:sso:::instance/ssoins-722348c2092582ca",
+		"PermissionSetArn": "arn:aws:sso:::permissionSet/ssoins-722348c2092582ca/ps-8c29bf9ce905bdf7"
+	},
+	"PowerUserAccess": {
+		"InstanceArn": "arn:aws:sso:::instance/ssoins-722348c2092582ca",
+		"PermissionSetArn": "arn:aws:sso:::permissionSet/ssoins-722348c2092582ca/ps-e2aea707f660136f"
+	},
+	"ReadOnlyAccess": {
+		"InstanceArn": "arn:aws:sso:::instance/ssoins-722348c2092582ca",
+		"PermissionSetArn": "arn:aws:sso:::permissionSet/ssoins-722348c2092582ca/ps-df10e31467e82686"
+	},
+	"ServiceCatalogAdminFullAccess": {
+		"InstanceArn": "arn:aws:sso:::instance/ssoins-722348c2092582ca",
+		"PermissionSetArn": "arn:aws:sso:::permissionSet/ssoins-722348c2092582ca/ps-8ff9697080e53bb9"
+	},
+	"ServiceCatalogEndUserAccess": {
+		"InstanceArn": "arn:aws:sso:::instance/ssoins-722348c2092582ca",
+		"PermissionSetArn": "arn:aws:sso:::permissionSet/ssoins-722348c2092582ca/ps-441146b78cb59c4e"
+	}
 }

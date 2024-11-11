@@ -18,6 +18,7 @@
 		"GitHubActionsSelfHostedServiceCodeBuildProjects",
 		"IAMIdentityCenterAdminGroups",
 		"Infrastructure",
-		"KaitoTokyoManagement"
+		"KaitoTokyoManagement",
+		"L2Constructs"
 	]
 }

@@ -1,0 +1,7 @@
+{
+	"name": "kaito-tokyo-aws-l2constructs",
+	"private": true,
+	"version": "0.1.0",
+	"main": "index.js",
+	"type": "module"
+}
