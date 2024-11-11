@@ -36,13 +36,16 @@ export class ManagementDeploymentRunnerStack extends cdk.Stack {
 			projectName: "ManagementDeploymentRunner",
 			source: codebuild.Source.gitHub({
 				owner: "kaito-tokyo",
+				repo: "kaito-tokyo-aws",
 				webhook: true,
 				webhookFilters: [
-					codebuild.FilterGroup.inEventOf(codebuild.EventAction.WORKFLOW_JOB_QUEUED)
-						.andRepositoryNameIs("kaito-tokyo-aws")
-						.andBranchIs("main")
+					codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs("main")
 				]
-			})
+			}),
+			environment: {
+				buildImage: codebuild.LinuxArmLambdaBuildImage.AMAZON_LINUX_2023_NODE_20
+			},
+			buildSpec: codebuild.BuildSpec.fromSourceFilename("KaitoToktoManagement/buildspec.yml")
 		});
 
 		project.role!.addManagedPolicy(codeConnectionManagedPolicy);
