@@ -5,12 +5,12 @@ import { aws_codebuild as codebuild, aws_iam as iam } from "aws-cdk-lib";
 
 import { ImportedCodeConnectionStack } from "./ImportedCodeConnectionStack.js";
 
-export interface ManagementDeploymentRunnerStackProps extends cdk.StackProps {
+export interface ManagementBuilderStackProps extends cdk.StackProps {
 	readonly importedCodeConnection: ImportedCodeConnectionStack;
 }
 
-export class ManagementDeploymentRunnerStack extends cdk.Stack {
-	constructor(scope: Construct, id: string, props: ManagementDeploymentRunnerStackProps) {
+export class ManagementBuilderStack extends cdk.Stack {
+	constructor(scope: Construct, id: string, props: ManagementBuilderStackProps) {
 		super(scope, id, props);
 
 		const codeConnectionManagedPolicy = new iam.ManagedPolicy(this, "CodeConnectionManagedPolicy", {

@@ -5,7 +5,7 @@ import { AdminGroupMembershipsStack } from "../lib/AdminGroupMembershipsStack.js
 import { EditorPermissionsStack } from "../lib/EditorPermissionsStack.js";
 import { ImportedCodeConnectionStack } from "../lib/ImportedCodeConnectionStack.js";
 import { ImportedControlTowerIdentitiesStack } from "../lib/ImportedControlTowerIdentitiesStack.js";
-import { ManagementDeploymentRunnerStack } from "../lib/ManagementDeploymentRunnerStack.js";
+import { ManagementBuilderStack } from "../lib/ManagementBuilderStack.js";
 
 import { managementAccountId, identityStoreId } from "kaito-tokyo-aws-common-parameters";
 import { IdentityStoreRepository } from "../lib/IdentitystoreRepository.js";
@@ -63,7 +63,7 @@ const importedCodeConnection = new ImportedCodeConnectionStack(app, "ImportedCod
 	}
 });
 
-new ManagementDeploymentRunnerStack(app, "ManagementDeploymentRunnerStack", {
+new ManagementBuilderStack(app, "ManagementBuilderStack", {
 	env: {
 		account: managementAccountId,
 		region: "us-east-1"
