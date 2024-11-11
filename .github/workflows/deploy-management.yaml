@@ -1,0 +1,38 @@
+---
+name: "deploy-management"
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "KaitoTokyoManagement/**"
+      - ".github/workflows/deploy-management.yaml"
+
+defaults:
+  run:
+    shell: "bash"
+
+jobs:
+  DeployManagement:
+    runs-on:
+      - "codebuild-ManagementDeploymentRunner-${{ github.run_id }}-${{ github.run_attempt }}"
+      - "image:arm-lambda-nodejs20"
+      - "instance-size:1GB"
+
+    concurrency:
+      group: "${{ github.workflow }}"
+
+    steps:
+      - name: "Fix npm"
+        run: "mkdir -p /tmp/opt/npm/lib"
+
+      - name: "Checkout"
+        uses: "actions/checkout@v4"
+
+      - name: "Install dependencies"
+        run: "npm ci"
+
+      - name: "Deploy KaitoTokyoManagement"
+        working-directory: "KaitoTokyoManagement"
+        run: "./update.sh"
