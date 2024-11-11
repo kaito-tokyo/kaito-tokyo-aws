@@ -33,7 +33,7 @@ export class ManagementBuilderStack extends cdk.Stack {
 		});
 
 		const project = new codebuild.Project(this, "ManagementDeploymentRunnerCodeBuildProject", {
-			projectName: "ManagementDeploymentRunner",
+			projectName: "ManagementBuilder",
 			source: codebuild.Source.gitHub({
 				owner: "kaito-tokyo",
 				repo: "kaito-tokyo-aws",
