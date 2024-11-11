@@ -2,4 +2,5 @@
 
 cd "$(dirname "$0")" || exit 1
 
-npx aws-cdk import -r resource-mapping.json ImportedControlTowerIdentitiesStack ImportedCodeConnectionStack
+npx aws-cdk import -m resource-mapping-ImportedControlTowerIdentitiesStack.json ImportedControlTowerIdentitiesStack
+npx aws-cdk import -r resource-mapping-ImportedCodeConnectionStack.json ImportedCodeConnectionStack
