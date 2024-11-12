@@ -3,5 +3,6 @@ version: "0.2"
 phases:
   build:
     commands:
+      - "mkdir -p /tmp/opt/npm/lib"
       - "cd KaitoTokyoManagement"
       - "./update.sh"
