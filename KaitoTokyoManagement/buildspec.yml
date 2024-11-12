@@ -1,8 +1,12 @@
 version: "0.2"
 
 phases:
-  build:
+  install:
     commands:
       - "mkdir -p /tmp/opt/npm/lib"
+      - "npm ci --workspace=kaito-tokyo-aws-kaito-tokyo-management"
+
+  build:
+    commands:
       - "cd KaitoTokyoManagement"
       - "./update.sh"
