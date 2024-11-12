@@ -4,7 +4,7 @@ phases:
   install:
     commands:
       - "mkdir -p /tmp/opt/npm/lib"
-      - "npm ci --workspace=kaito-tokyo-aws-kaito-tokyo-management"
+      - "npm ci"
 
   build:
     commands:
