@@ -68,5 +68,13 @@ export class ManagementBuilderStack extends cdk.Stack {
 				}
 			})
 		);
+
+		project.addToRolePolicy(
+			new iam.PolicyStatement({
+				effect: iam.Effect.ALLOW,
+				resources: ["arn:aws:identitystore:::user/*"],
+				actions: ["identitystore:ListUsers"]
+			})
+		);
 	}
 }
