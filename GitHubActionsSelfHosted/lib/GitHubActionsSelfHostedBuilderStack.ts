@@ -45,7 +45,7 @@ export class GitHubActionsSelfHostedBuilderStack extends cdk.Stack {
 			environment: {
 				buildImage: codebuild.LinuxArmLambdaBuildImage.AMAZON_LINUX_2023_NODE_20
 			},
-			buildSpec: codebuild.BuildSpec.fromSourceFilename("GitHubSelfHosted/buildspec.yml")
+			buildSpec: codebuild.BuildSpec.fromSourceFilename("GitHubActionsSelfHosted/buildspec.yml")
 		});
 
 		project.role!.addManagedPolicy(codeConnectionManagedPolicy);
