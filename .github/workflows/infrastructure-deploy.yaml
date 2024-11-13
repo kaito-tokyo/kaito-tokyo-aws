@@ -32,7 +32,6 @@ jobs:
         uses: "aws-actions/configure-aws-credentials@v4"
         with:
           aws-region: "us-east-1"
-          audience: "sts.amazonaws.com"
           role-to-assume: "arn:aws:iam::147997151289:role/InfrastructureRoute53ProdRole"
 
       - run: "aws sts get-caller-identity"
