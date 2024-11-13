@@ -9,7 +9,7 @@ export interface GeneralRunnerStackProps extends cdk.StackProps {
 	readonly importedCodeConnection: ImportedCodeConnectionStack;
 }
 
-export class GeneralRunnerStack extends cdk.Stack {
+export class CDKRunnerStack extends cdk.Stack {
 	constructor(scope: Construct, id: string, props: GeneralRunnerStackProps) {
 		super(scope, id, props);
 
@@ -32,7 +32,7 @@ export class GeneralRunnerStack extends cdk.Stack {
 			]
 		});
 
-		const project = new codebuild.Project(this, "GeneralRunnerCodeBuildProject", {
+		const project = new codebuild.Project(this, "CDKRunnerCodeBuildProject", {
 			projectName: "CDKRunner",
 			source: codebuild.Source.gitHub({
 				owner: "kaito-tokyo",
