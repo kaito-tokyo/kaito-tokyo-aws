@@ -45,7 +45,7 @@ export class ManagementBuilderStack extends cdk.Stack {
 			environment: {
 				buildImage: codebuild.LinuxArmLambdaBuildImage.AMAZON_LINUX_2023_NODE_20
 			},
-			buildSpec: codebuild.BuildSpec.fromSourceFilename("KaitoTokyoManagement/buildspec.yml")
+			buildSpec: codebuild.BuildSpec.fromSourceFilename("Management/buildspec.yml")
 		});
 
 		project.role!.addManagedPolicy(codeConnectionManagedPolicy);
