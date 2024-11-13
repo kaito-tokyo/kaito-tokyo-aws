@@ -20,16 +20,11 @@ jobs:
     concurrency:
       group: "${{ github.workflow }}-main"
 
+    permissions:
+      contents: "read"
+      id-token: "write"
+
     steps:
       - name: "Fix npm"
         run: "mkdir -p /tmp/opt/npm/lib"
 
-      - name: "Checkout"
-        uses: "actions/checkout@v4"
-
-      - name: "Install dependencies"
-        run: "npm ci"
-
-      - name: "Deploy Infrastructure"
-        working-directory: "Infrastructure"
-        run: "./update.sh"
