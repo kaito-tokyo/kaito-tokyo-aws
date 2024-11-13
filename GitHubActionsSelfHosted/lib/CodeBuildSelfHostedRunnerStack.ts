@@ -54,8 +54,9 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 			assumedBy: new iam.FederatedPrincipal(githubProvider.openIdConnectProviderArn, {
 				StringEquals: {
 					"token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-			    "token.actions.githubusercontent.com:sub": "repo:kaito-tokyo/kaito-tokyo-aws:ref:refs/heads/main",
-			    "token.actions.githubusercontent.com:workflow": "infrastructure-deploy"
+					"token.actions.githubusercontent.com:sub":
+						"repo:kaito-tokyo/kaito-tokyo-aws:ref:refs/heads/main",
+					"token.actions.githubusercontent.com:workflow": "infrastructure-deploy"
 				}
 			})
 		});
