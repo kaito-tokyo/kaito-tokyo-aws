@@ -34,7 +34,6 @@ jobs:
           aws-region: "us-east-1"
           role-to-assume: "arn:aws:iam::147997151289:role/InfrastructureRoute53ProdRole"
 
-
       - name: "Checkout"
         uses: "actions/checkout@v4"
 
