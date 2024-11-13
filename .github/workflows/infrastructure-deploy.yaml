@@ -12,10 +12,11 @@ defaults:
 
 jobs:
   DeployInfrastructure:
-    runs-on:
-      - "codebuild-CDKRunner-${{ github.run_id }}-${{ github.run_attempt }}"
-      - "image:arm-lambda-nodejs20"
-      - "instance-size:1GB"
+    # runs-on:
+    #   - "codebuild-CDKRunner-${{ github.run_id }}-${{ github.run_attempt }}"
+    #   - "image:arm-lambda-nodejs20"
+    #   - "instance-size:1GB"
+    runs-on: "ubuntu-24.04"
 
     concurrency:
       group: "${{ github.workflow }}-main"
