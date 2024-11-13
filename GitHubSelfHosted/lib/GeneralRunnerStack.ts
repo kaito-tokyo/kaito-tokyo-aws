@@ -5,12 +5,12 @@ import { aws_codebuild as codebuild, aws_iam as iam } from "aws-cdk-lib";
 
 import { ImportedCodeConnectionStack } from "./ImportedCodeConnectionStack.js";
 
-export interface ManagementBuilderStackProps extends cdk.StackProps {
+export interface GeneralRunnerStackProps extends cdk.StackProps {
 	readonly importedCodeConnection: ImportedCodeConnectionStack;
 }
 
-export class ManagementBuilderStack extends cdk.Stack {
-	constructor(scope: Construct, id: string, props: ManagementBuilderStackProps) {
+export class GeneralRunnerStack extends cdk.Stack {
+	constructor(scope: Construct, id: string, props: GeneralRunnerStackProps) {
 		super(scope, id, props);
 
 		const codeConnectionManagedPolicy = new iam.ManagedPolicy(this, "CodeConnectionManagedPolicy", {
@@ -32,49 +32,18 @@ export class ManagementBuilderStack extends cdk.Stack {
 			]
 		});
 
-		const project = new codebuild.Project(this, "ManagementBuilderCodeBuildProject", {
-			projectName: "ManagementBuilder",
+		const project = new codebuild.Project(this, "GeneralRunnerCodeBuildProject", {
+			projectName: "CDKRunner",
 			source: codebuild.Source.gitHub({
 				owner: "kaito-tokyo",
-				repo: "kaito-tokyo-aws",
 				webhook: true,
 				webhookFilters: [
-					codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs("main")
+					codebuild.FilterGroup.inEventOf(codebuild.EventAction.WORKFLOW_JOB_QUEUED)
 				]
 			}),
-			environment: {
-				buildImage: codebuild.LinuxArmLambdaBuildImage.AMAZON_LINUX_2023_NODE_20
-			},
-			buildSpec: codebuild.BuildSpec.fromSourceFilename("KaitoTokyoManagement/buildspec.yml")
 		});
 
 		project.role!.addManagedPolicy(codeConnectionManagedPolicy);
 		project.node.addDependency(codeConnectionManagedPolicy);
-
-		project.addToRolePolicy(
-			new iam.PolicyStatement({
-				effect: iam.Effect.ALLOW,
-				resources: ["*"],
-				actions: ["sts:AssumeRole"],
-				conditions: {
-					StringEquals: {
-						"iam:ResourceTag/aws-cdk:bootstrap-role": [
-							"image-publishing",
-							"file-publishing",
-							"deploy",
-							"lookup"
-						]
-					}
-				}
-			})
-		);
-
-		project.addToRolePolicy(
-			new iam.PolicyStatement({
-				effect: iam.Effect.ALLOW,
-				resources: ["*"],
-				actions: ["identitystore:ListUsers"]
-			})
-		);
 	}
 }

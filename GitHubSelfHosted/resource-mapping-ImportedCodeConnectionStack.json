@@ -1,0 +1,8 @@
+{
+	"GitHubCodeConnection": {
+		"ConnectionArn": "arn:aws:codeconnections:us-east-1:147997151289:connection/8687f835-f252-4509-b46f-97a4484a4e84"
+	},
+	"GitHubCodeStarConnection": {
+		"ConnectionArn": "arn:aws:codestar-connections:us-east-1:784179762749:connection/1cdcac84-79ff-4fd8-b014-03c90fd03882"
+	}
+}

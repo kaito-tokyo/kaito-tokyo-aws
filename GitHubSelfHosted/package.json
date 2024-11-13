@@ -1,0 +1,17 @@
+{
+	"name": "kaito-tokyo-aws-kaito-tokyo-management",
+	"version": "0.1.0",
+	"type": "module",
+	"scripts": {
+		"check": "tsc"
+	},
+	"devDependencies": {
+		"@aws-sdk/client-identitystore": "^3.687.0",
+		"@types/node": "^20.17.6",
+		"aws-cdk": "2.166.0",
+		"aws-cdk-lib": "2.166.0",
+		"constructs": "^10.4.2",
+		"tsx": "^4.19.2",
+		"typescript": "~5.6.3"
+	}
+}
