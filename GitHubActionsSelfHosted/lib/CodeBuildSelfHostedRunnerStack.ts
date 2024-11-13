@@ -67,7 +67,9 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 		infrastructureRoute53ProdRole.addToPolicy(
 			new iam.PolicyStatement({
 				effect: iam.Effect.ALLOW,
-				resources: ["arn:aws:iam::913524900670:role/cdk-hnb659fds-deploy-role-913524900670-us-east-1"],
+				resources: [
+					"arn:aws:iam::913524900670:role/cdk-hnb659fds-deploy-role-913524900670-us-east-1"
+				],
 				actions: ["sts:AssumeRole"]
 			})
 		);
