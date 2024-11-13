@@ -5,12 +5,12 @@ import { aws_codebuild as codebuild, aws_iam as iam } from "aws-cdk-lib";
 
 import { ImportedCodeConnectionStack } from "./ImportedCodeConnectionStack.js";
 
-export interface GeneralRunnerStackProps extends cdk.StackProps {
+export interface CodeBuildSelfHostedRunnerStackProps extends cdk.StackProps {
 	readonly importedCodeConnection: ImportedCodeConnectionStack;
 }
 
-export class CDKRunnerStack extends cdk.Stack {
-	constructor(scope: Construct, id: string, props: GeneralRunnerStackProps) {
+export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
+	constructor(scope: Construct, id: string, props: CodeBuildSelfHostedRunnerStackProps) {
 		super(scope, id, props);
 
 		const codeConnectionManagedPolicy = new iam.ManagedPolicy(this, "CodeConnectionManagedPolicy", {
@@ -43,5 +43,19 @@ export class CDKRunnerStack extends cdk.Stack {
 
 		project.role!.addManagedPolicy(codeConnectionManagedPolicy);
 		project.node.addDependency(codeConnectionManagedPolicy);
+
+		const githubProvider = new iam.OpenIdConnectProvider(this, "GitHubProvider", {
+			url: "https://token.actions.githubusercontent.com",
+			clientIds: ["sts.amazonaws.com"]
+		});
+
+		new iam.Role(this, "CodeBuildCDKRunnerRole", {
+			assumedBy: new iam.FederatedPrincipal(githubProvider.openIdConnectProviderArn, {
+				StringEquals: {
+					"token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
+			    "token.actions.githubusercontent.com:sub": "repo:kaito-tokyo/kaito-tokyo-aws:ref:refs/heads/main"
+				}
+			})
+		});
 	}
 }

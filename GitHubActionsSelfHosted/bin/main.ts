@@ -4,7 +4,7 @@ import * as cdk from "aws-cdk-lib";
 import { ImportedCodeConnectionStack } from "../lib/ImportedCodeConnectionStack.js";
 
 import { infrastructureAccountIds } from "kaito-tokyo-aws-common-parameters";
-import { CDKRunnerStack } from "../lib/CDKRunnerStack.js";
+import { CodeBuildSelfHostedRunnerStack } from "../lib/CodeBuildSelfHostedRunnerStack.js";
 import { GitHubActionsSelfHostedBuilderStack } from "../lib/GitHubActionsSelfHostedBuilderStack.js";
 
 const app = new cdk.App();
@@ -24,7 +24,7 @@ new GitHubActionsSelfHostedBuilderStack(app, "GitHubActionsSelfHostedBuilderStac
 	importedCodeConnection
 });
 
-new CDKRunnerStack(app, "CDKRunnerStack", {
+new CodeBuildSelfHostedRunnerStack(app, "CDKRunnerStack", {
 	env: {
 		account: infrastructureAccountIds.gitHubSelfHostedProd001,
 		region: "us-east-1"
