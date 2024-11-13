@@ -12,11 +12,10 @@ defaults:
 
 jobs:
   DeployInfrastructure:
-    # runs-on:
-    #   - "codebuild-CDKRunner-${{ github.run_id }}-${{ github.run_attempt }}"
-    #   - "image:arm-lambda-nodejs20"
-    #   - "instance-size:1GB"
-    runs-on: "ubuntu-24.04"
+    runs-on:
+      - "codebuild-CDKRunner-${{ github.run_id }}-${{ github.run_attempt }}"
+      - "image:arm-lambda-nodejs20"
+      - "instance-size:1GB"
 
     concurrency:
       group: "${{ github.workflow }}-main"
@@ -28,17 +27,6 @@ jobs:
     steps:
       - name: "Fix npm"
         run: "mkdir -p /tmp/opt/npm/lib"
-
-      - name: Checkout actions-oidc-debugger
-        uses: actions/checkout@v3
-        with:
-          repository: github/actions-oidc-debugger
-          ref: main
-          path: ./.github/actions/actions-oidc-debugger
-      - name: Debug OIDC Claims
-        uses: ./.github/actions/actions-oidc-debugger
-        with:
-          audience: '${{ github.server_url }}/${{ github.repository_owner }}'
 
       - name: "Configure AWS credentials"
         uses: "aws-actions/configure-aws-credentials@v4"
