@@ -7,6 +7,6 @@ export const infrastructureAccountIds = {
 
 export const workloadsAccountIds = {
 	obsChatTalkerDev001: "586794439382"
-}
+};
 
 export const identityStoreId = "d-90674974be";
