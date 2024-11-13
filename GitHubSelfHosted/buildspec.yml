@@ -8,5 +8,5 @@ phases:
 
   build:
     commands:
-      - "cd KaitoTokyoManagement"
+      - "cd GitHubSelfHosted"
       - "./update.sh"

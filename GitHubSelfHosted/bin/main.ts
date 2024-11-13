@@ -5,6 +5,7 @@ import { ImportedCodeConnectionStack } from "../lib/ImportedCodeConnectionStack.
 
 import { infrastructureAccountIds } from "kaito-tokyo-aws-common-parameters";
 import { GeneralRunnerStack } from "../lib/GeneralRunnerStack.js";
+import { GitHubActionsSelfHostedBuilderStack } from "../lib/GitHubActionsSelfHostedBuilderStack.js";
 
 const app = new cdk.App();
 
@@ -13,6 +14,14 @@ const importedCodeConnection = new ImportedCodeConnectionStack(app, "ImportedCod
 		account: infrastructureAccountIds.gitHubSelfHostedProd001,
 		region: "us-east-1"
 	}
+});
+
+new GitHubActionsSelfHostedBuilderStack(app, "GitHubActionsSelfHostedBuilderStack", {
+	env: {
+		account: infrastructureAccountIds.gitHubSelfHostedProd001,
+		region: "us-east-1"
+	},
+	importedCodeConnection
 });
 
 new GeneralRunnerStack(app, "GeneralRunnerStack", {

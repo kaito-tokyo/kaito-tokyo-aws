@@ -37,10 +37,8 @@ export class GeneralRunnerStack extends cdk.Stack {
 			source: codebuild.Source.gitHub({
 				owner: "kaito-tokyo",
 				webhook: true,
-				webhookFilters: [
-					codebuild.FilterGroup.inEventOf(codebuild.EventAction.WORKFLOW_JOB_QUEUED)
-				]
-			}),
+				webhookFilters: [codebuild.FilterGroup.inEventOf(codebuild.EventAction.WORKFLOW_JOB_QUEUED)]
+			})
 		});
 
 		project.role!.addManagedPolicy(codeConnectionManagedPolicy);
