@@ -1,5 +1,5 @@
 ---
-name: "deploy-infrastructure"
+name: "infrastructure-deploy"
 
 on:
   push:
@@ -27,3 +27,11 @@ jobs:
     steps:
       - name: "Fix npm"
         run: "mkdir -p /tmp/opt/npm/lib"
+
+      - name: "Configure AWS credentials"
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: "us-east-1"
+          role-to-assume: "arn:aws:iam::147997151289:role/Route53ProdRole"
+
+      - run: "aws sts get-caller-identity"

@@ -49,11 +49,13 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 			clientIds: ["sts.amazonaws.com"]
 		});
 
-		new iam.Role(this, "CodeBuildCDKRunnerRole", {
+		new iam.Role(this, "Route53ProdRole", {
+			roleName: "Route53ProdRole",
 			assumedBy: new iam.FederatedPrincipal(githubProvider.openIdConnectProviderArn, {
 				StringEquals: {
 					"token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-			    "token.actions.githubusercontent.com:sub": "repo:kaito-tokyo/kaito-tokyo-aws:ref:refs/heads/main"
+			    "token.actions.githubusercontent.com:sub": "repo:kaito-tokyo/kaito-tokyo-aws:ref:refs/heads/main",
+			    "token.actions.githubusercontent.com:workflow": "infrastructure-deploy"
 				}
 			})
 		});
