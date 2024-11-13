@@ -16,6 +16,7 @@
 		"CommonParameters",
 		"GitHubActionsSelfHostedManageServiceCodeBuildProjects",
 		"GitHubActionsSelfHostedServiceCodeBuildProjects",
+		"GitHubActionsSelfHosted",
 		"IAMIdentityCenterAdminGroups",
 		"Infrastructure",
 		"KaitoTokyoManagement",
