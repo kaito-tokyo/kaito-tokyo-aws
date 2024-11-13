@@ -57,8 +57,7 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 					StringEquals: {
 						"token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
 						"token.actions.githubusercontent.com:sub":
-							"repo:kaito-tokyo/kaito-tokyo-aws:ref:refs/heads/main",
-						"token.actions.githubusercontent.com:workflow": "infrastructure-deploy"
+							"repo:kaito-tokyo/kaito-tokyo-aws:ref:refs/heads/main"
 					}
 				},
 				"sts:AssumeRoleWithWebIdentity"
