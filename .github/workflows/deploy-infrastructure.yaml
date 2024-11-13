@@ -1,5 +1,5 @@
 ---
-name: "manage-infrastructure"
+name: "deploy-infrastructure"
 
 on:
   push:
