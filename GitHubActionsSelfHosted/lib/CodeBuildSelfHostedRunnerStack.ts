@@ -49,7 +49,7 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 			clientIds: ["sts.amazonaws.com"]
 		});
 
-		new iam.Role(this, "InfrastructureRoute53ProdRole", {
+		const infrastructureRoute53ProdRole = new iam.Role(this, "InfrastructureRoute53ProdRole", {
 			roleName: "InfrastructureRoute53ProdRole",
 			assumedBy: new iam.FederatedPrincipal(
 				githubProvider.openIdConnectProviderArn,
@@ -63,5 +63,13 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 				"sts:AssumeRoleWithWebIdentity"
 			)
 		});
+
+		infrastructureRoute53ProdRole.addToPolicy(
+			new iam.PolicyStatement({
+				effect: iam.Effect.ALLOW,
+				resources: ["arn:aws:iam::913524900670:role/cdk-hnb659fds-deploy-role-913524900670-us-east-1"],
+				actions: ["sts:AssumeRole"]
+			})
+		);
 	}
 }
