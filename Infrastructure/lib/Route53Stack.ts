@@ -3,7 +3,7 @@ import { Construct } from "constructs";
 
 import { aws_iam as iam, aws_route53 as route53 } from "aws-cdk-lib";
 
-import { ObsChatTalkerDev001 } from "account_ids";
+import { workloadsAccountIds } from "kaito-tokyo-aws-common-parameters";
 
 export class Route53Stack extends cdk.Stack {
 	constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -18,8 +18,8 @@ export class Route53Stack extends cdk.Stack {
 			"ApidevObsChatTalkerZoneDelegationRole",
 			{
 				path: "/route53-delegation/",
-				roleName: `apidev-${ObsChatTalkerDev001}`,
-				assumedBy: new iam.AccountPrincipal(ObsChatTalkerDev001),
+				roleName: `apidev-${workloadsAccountIds.obsChatTalkerDev001}`,
+				assumedBy: new iam.AccountPrincipal(workloadsAccountIds.obsChatTalkerDev001),
 				inlinePolicies: {
 					crossAccountPolicy: new iam.PolicyDocument({
 						statements: [

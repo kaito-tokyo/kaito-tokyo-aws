@@ -3,13 +3,13 @@ import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
 import { Route53Stack } from "../lib/Route53Stack.js";
 
-import { Route53Prod001 } from "account_ids";
+import { infrastructureAccountIds } from "kaito-tokyo-aws-common-parameters";
 
 const app = new cdk.App();
 
-new Route53Stack(app, "InfrastructureRoute53Stack", {
+new Route53Stack(app, "Route53Stack", {
 	env: {
-		account: Route53Prod001,
+		account: infrastructureAccountIds.route53Prod001,
 		region: "us-east-1"
 	}
 });

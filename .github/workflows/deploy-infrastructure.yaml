@@ -1,27 +1,24 @@
 ---
-name: "deploy-management"
+name: "manage-infrastructure"
 
 on:
   push:
     branches:
       - "main"
-    paths:
-      - "KaitoTokyoManagement/**"
-      - ".github/workflows/deploy-management.yaml"
 
 defaults:
   run:
     shell: "bash"
 
 jobs:
-  DeployManagement:
+  DeployInfrastructure:
     runs-on:
-      - "codebuild-ManagementDeploymentRunner-${{ github.run_id }}-${{ github.run_attempt }}"
+      - "codebuild-CDKRunner-${{ github.run_id }}-${{ github.run_attempt }}"
       - "image:arm-lambda-nodejs20"
       - "instance-size:1GB"
 
     concurrency:
-      group: "${{ github.workflow }}"
+      group: "${{ github.workflow }}-main"
 
     steps:
       - name: "Fix npm"
@@ -33,6 +30,6 @@ jobs:
       - name: "Install dependencies"
         run: "npm ci"
 
-      - name: "Deploy KaitoTokyoManagement"
-        working-directory: "KaitoTokyoManagement"
+      - name: "Deploy Infrastructure"
+        working-directory: "Infrastructure"
         run: "./update.sh"
