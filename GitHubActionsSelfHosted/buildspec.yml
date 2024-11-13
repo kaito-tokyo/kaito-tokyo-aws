@@ -8,5 +8,5 @@ phases:
 
   build:
     commands:
-      - "cd GitHubSelfHosted"
+      - "cd GitHubActionsSelfHosted"
       - "./update.sh"
