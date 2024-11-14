@@ -4,12 +4,48 @@ import { Construct } from "constructs";
 import { aws_codebuild as codebuild, aws_iam as iam } from "aws-cdk-lib";
 
 import { ImportedCodeConnectionStack } from "./ImportedCodeConnectionStack.js";
+import { infrastructureAccountIds } from "kaito-tokyo-aws-common-parameters";
 
 export interface CodeBuildSelfHostedRunnerStackProps extends cdk.StackProps {
 	readonly importedCodeConnection: ImportedCodeConnectionStack;
 }
 
+export function createPolicyStatementForCDK(
+	accountId: string,
+	qualifier: string = "hnb659fds"
+): iam.PolicyStatement {
+	return new iam.PolicyStatement({
+		effect: iam.Effect.ALLOW,
+		resources: [
+			`arn:aws:iam::${accountId}:role/cdk-${qualifier}-cfn-exec-role-913524900670-us-east-1`,
+			`arn:aws:iam::${accountId}:role/cdk-${qualifier}-deploy-role-913524900670-us-east-1`,
+			`arn:aws:iam::${accountId}:role/cdk-${qualifier}-file-publishing-role-913524900670-us-east-1`,
+			`arn:aws:iam::913524900670:role/cdk-${qualifier}-image-publishing-role-913524900670-us-east-1`,
+			`arn:aws:iam::913524900670:role/cdk-${qualifier}-lookup-role-913524900670-us-east-1`
+		],
+		actions: ["sts:AssumeRole"]
+	});
+}
+
 export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
+	createPolicyStatementForCDK(
+		accountId: string,
+		region: string,
+		qualifier: string = "hnb659fds"
+	): iam.PolicyStatement {
+		return new iam.PolicyStatement({
+			effect: iam.Effect.ALLOW,
+			resources: [
+				`arn:aws:iam::${accountId}:role/cdk-${qualifier}-cfn-exec-role-${accountId}-${region}`,
+				`arn:aws:iam::${accountId}:role/cdk-${qualifier}-deploy-role-${accountId}-${region}`,
+				`arn:aws:iam::${accountId}:role/cdk-${qualifier}-file-publishing-role-${accountId}-${region}`,
+				`arn:aws:iam::${accountId}:role/cdk-${qualifier}-image-publishing-role-${accountId}-${region}`,
+				`arn:aws:iam::${accountId}:role/cdk-${qualifier}-lookup-role-${accountId}-${region}`
+			],
+			actions: ["sts:AssumeRole"]
+		});
+	}
+
 	constructor(scope: Construct, id: string, props: CodeBuildSelfHostedRunnerStackProps) {
 		super(scope, id, props);
 
@@ -49,8 +85,8 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 			clientIds: ["sts.amazonaws.com"]
 		});
 
-		const infrastructureRoute53ProdRole = new iam.Role(this, "InfrastructureRoute53ProdRole", {
-			roleName: "InfrastructureRoute53ProdRole",
+		const infrastructureRoute53ProdRole = new iam.Role(this, "KaitoTokyoAwsMainRole", {
+			roleName: "KaitoTokyoAwsMainRole",
 			assumedBy: new iam.FederatedPrincipal(
 				githubProvider.openIdConnectProviderArn,
 				{
@@ -65,17 +101,7 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 		});
 
 		infrastructureRoute53ProdRole.addToPolicy(
-			new iam.PolicyStatement({
-				effect: iam.Effect.ALLOW,
-				resources: [
-					"arn:aws:iam::913524900670:role/cdk-hnb659fds-cfn-exec-role-913524900670-us-east-1",
-					"arn:aws:iam::913524900670:role/cdk-hnb659fds-deploy-role-913524900670-us-east-1",
-					"arn:aws:iam::913524900670:role/cdk-hnb659fds-file-publishing-role-913524900670-us-east-1",
-					"arn:aws:iam::913524900670:role/cdk-hnb659fds-image-publishing-role-913524900670-us-east-1",
-					"arn:aws:iam::913524900670:role/cdk-hnb659fds-lookup-role-913524900670-us-east-1"
-				],
-				actions: ["sts:AssumeRole"]
-			})
+			createPolicyStatementForCDK(infrastructureAccountIds.route53Prod001, "us-east-1")
 		);
 	}
 }
