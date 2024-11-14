@@ -86,5 +86,24 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 		kaitoTokyoAwsMainRole.addToPolicy(
 			this.createPolicyStatementForCDK(infrastructureAccountIds.route53Prod001, "us-east-1")
 		);
+
+		const obsChattalkerMainRole = new iam.Role(this, "ObsChatTalkerMainRole", {
+			roleName: "ObsChatTalkerMainRole",
+			assumedBy: new iam.FederatedPrincipal(
+				githubProvider.openIdConnectProviderArn,
+				{
+					StringEquals: {
+						"token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
+						"token.actions.githubusercontent.com:sub":
+							"repo:kaito-tokyo/obs-chattalker:ref:refs/heads/main"
+					}
+				},
+				"sts:AssumeRoleWithWebIdentity"
+			)
+		});
+
+		kaitoTokyoAwsMainRole.addToPolicy(
+			this.createPolicyStatementForCDK(infrastructureAccountIds.route53Prod001, "us-east-1")
+		);
 	}
 }
