@@ -16,6 +16,7 @@
 		"CommonParameters",
 		"GitHubActionsSelfHosted",
 		"Infrastructure",
-		"L2Constructs"
+		"L2Constructs",
+		"Management"
 	]
 }
