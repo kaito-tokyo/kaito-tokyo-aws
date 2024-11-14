@@ -4,7 +4,7 @@ import { Construct } from "constructs";
 import { aws_codebuild as codebuild, aws_iam as iam } from "aws-cdk-lib";
 
 import { ImportedCodeConnectionStack } from "./ImportedCodeConnectionStack.js";
-import { infrastructureAccountIds } from "kaito-tokyo-aws-commonparameters";
+import { infrastructureAccountIds, workloadsAccountIds } from "kaito-tokyo-aws-commonparameters";
 
 export interface CodeBuildSelfHostedRunnerStackProps extends cdk.StackProps {
 	readonly importedCodeConnection: ImportedCodeConnectionStack;
@@ -87,7 +87,7 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 			this.createPolicyStatementForCDK(infrastructureAccountIds.route53Prod001, "us-east-1")
 		);
 
-		const obsChattalkerMainRole = new iam.Role(this, "ObsChatTalkerMainRole", {
+		const obsChatTalkerMainRole = new iam.Role(this, "ObsChatTalkerMainRole", {
 			roleName: "ObsChatTalkerMainRole",
 			assumedBy: new iam.FederatedPrincipal(
 				githubProvider.openIdConnectProviderArn,
@@ -102,8 +102,8 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 			)
 		});
 
-		kaitoTokyoAwsMainRole.addToPolicy(
-			this.createPolicyStatementForCDK(infrastructureAccountIds.route53Prod001, "us-east-1")
+		obsChatTalkerMainRole.addToPolicy(
+			this.createPolicyStatementForCDK(workloadsAccountIds.obsChatTalkerDev001, "us-east-1")
 		);
 	}
 }

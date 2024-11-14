@@ -24,7 +24,7 @@ new GitHubActionsSelfHostedBuilderStack(app, "GitHubActionsSelfHostedBuilderStac
 	importedCodeConnection
 });
 
-new CodeBuildSelfHostedRunnerStack(app, "CDKRunnerStack", {
+new CodeBuildSelfHostedRunnerStack(app, "CodeBuildSelfHostedRunnerStack", {
 	env: {
 		account: infrastructureAccountIds.gitHubSelfHostedProd001,
 		region: "us-east-1"
