@@ -68,7 +68,11 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 			new iam.PolicyStatement({
 				effect: iam.Effect.ALLOW,
 				resources: [
-					"arn:aws:iam::913524900670:role/cdk-hnb659fds-deploy-role-913524900670-us-east-1"
+					"arn:aws:iam::913524900670:role/cdk-hnb659fds-cfn-exec-role-913524900670-us-east-1",
+					"arn:aws:iam::913524900670:role/cdk-hnb659fds-deploy-role-913524900670-us-east-1",
+					"arn:aws:iam::913524900670:role/cdk-hnb659fds-file-publishing-role-913524900670-us-east-1",
+					"arn:aws:iam::913524900670:role/cdk-hnb659fds-image-publishing-role-913524900670-us-east-1",
+					"arn:aws:iam::913524900670:role/cdk-hnb659fds-lookup-role-913524900670-us-east-1"
 				],
 				actions: ["sts:AssumeRole"]
 			})
