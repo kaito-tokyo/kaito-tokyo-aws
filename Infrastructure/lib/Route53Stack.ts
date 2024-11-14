@@ -3,7 +3,7 @@ import { Construct } from "constructs";
 
 import { aws_iam as iam, aws_route53 as route53 } from "aws-cdk-lib";
 
-import { workloadsAccountIds } from "kaito-tokyo-aws-common-parameters";
+import { workloadsAccountIds } from "kaito-tokyo-aws-commonparameters";
 
 export class Route53Stack extends cdk.Stack {
 	constructor(scope: Construct, id: string, props?: cdk.StackProps) {

@@ -2,4 +2,4 @@
 
 cd "$(dirname "$0")" || exit 1
 
-npx aws-cdk deploy ManagementBuilderStack
+npm run cdk -- deploy ManagementBuilderStack

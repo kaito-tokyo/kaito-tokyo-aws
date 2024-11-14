@@ -8,5 +8,5 @@ then
 	exit 1
 fi
 
-npx aws-cdk bootstrap \
+npm run cdk bootstrap \
 	--cloudformation-execution-policies=arn:aws:iam::aws:policy/AdministratorAccess

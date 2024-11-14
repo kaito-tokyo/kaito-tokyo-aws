@@ -4,7 +4,7 @@ import { Construct } from "constructs";
 import { aws_codebuild as codebuild, aws_iam as iam } from "aws-cdk-lib";
 
 import { ImportedCodeConnectionStack } from "./ImportedCodeConnectionStack.js";
-import { infrastructureAccountIds } from "kaito-tokyo-aws-common-parameters";
+import { infrastructureAccountIds } from "kaito-tokyo-aws-commonparameters";
 
 export interface CodeBuildSelfHostedRunnerStackProps extends cdk.StackProps {
 	readonly importedCodeConnection: ImportedCodeConnectionStack;

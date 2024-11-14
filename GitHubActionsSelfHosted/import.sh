@@ -2,4 +2,4 @@
 
 cd "$(dirname "$0")" || exit 1
 
-npx aws-cdk import -m resource-mapping-ImportedCodeConnectionStack.json ImportedCodeConnectionStack
+npm run cdk -- import -m resource-mapping-ImportedCodeConnectionStack.json ImportedCodeConnectionStack
