@@ -14,12 +14,8 @@
 	},
 	"workspaces": [
 		"CommonParameters",
-		"GitHubActionsSelfHostedManageServiceCodeBuildProjects",
-		"GitHubActionsSelfHostedServiceCodeBuildProjects",
 		"GitHubActionsSelfHosted",
-		"IAMIdentityCenterAdminGroups",
 		"Infrastructure",
-		"KaitoTokyoManagement",
 		"L2Constructs"
 	]
 }
