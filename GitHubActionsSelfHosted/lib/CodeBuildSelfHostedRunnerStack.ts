@@ -68,7 +68,7 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 			clientIds: ["sts.amazonaws.com"]
 		});
 
-		const infrastructureRoute53ProdRole = new iam.Role(this, "KaitoTokyoAwsMainRole", {
+		const kaitoTokyoAwsMainRole = new iam.Role(this, "KaitoTokyoAwsMainRole", {
 			roleName: "KaitoTokyoAwsMainRole",
 			assumedBy: new iam.FederatedPrincipal(
 				githubProvider.openIdConnectProviderArn,
@@ -83,7 +83,26 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 			)
 		});
 
-		infrastructureRoute53ProdRole.addToPolicy(
+		kaitoTokyoAwsMainRole.addToPolicy(
+			this.createPolicyStatementForCDK(infrastructureAccountIds.route53Prod001, "us-east-1")
+		);
+
+		const obsChattalkerMainRole = new iam.Role(this, "ObsChattalkerMainRole", {
+			roleName: "ObsChattalkerMainRole",
+			assumedBy: new iam.FederatedPrincipal(
+				githubProvider.openIdConnectProviderArn,
+				{
+					StringEquals: {
+						"token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
+						"token.actions.githubusercontent.com:sub":
+							"repo:kaito-tokyo/obs-chattalker:ref:refs/heads/main"
+					}
+				},
+				"sts:AssumeRoleWithWebIdentity"
+			)
+		});
+
+		kaitoTokyoAwsMainRole.addToPolicy(
 			this.createPolicyStatementForCDK(infrastructureAccountIds.route53Prod001, "us-east-1")
 		);
 	}
