@@ -10,23 +10,6 @@ export interface CodeBuildSelfHostedRunnerStackProps extends cdk.StackProps {
 	readonly importedCodeConnection: ImportedCodeConnectionStack;
 }
 
-export function createPolicyStatementForCDK(
-	accountId: string,
-	qualifier: string = "hnb659fds"
-): iam.PolicyStatement {
-	return new iam.PolicyStatement({
-		effect: iam.Effect.ALLOW,
-		resources: [
-			`arn:aws:iam::${accountId}:role/cdk-${qualifier}-cfn-exec-role-913524900670-us-east-1`,
-			`arn:aws:iam::${accountId}:role/cdk-${qualifier}-deploy-role-913524900670-us-east-1`,
-			`arn:aws:iam::${accountId}:role/cdk-${qualifier}-file-publishing-role-913524900670-us-east-1`,
-			`arn:aws:iam::913524900670:role/cdk-${qualifier}-image-publishing-role-913524900670-us-east-1`,
-			`arn:aws:iam::913524900670:role/cdk-${qualifier}-lookup-role-913524900670-us-east-1`
-		],
-		actions: ["sts:AssumeRole"]
-	});
-}
-
 export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 	createPolicyStatementForCDK(
 		accountId: string,
@@ -101,7 +84,7 @@ export class CodeBuildSelfHostedRunnerStack extends cdk.Stack {
 		});
 
 		infrastructureRoute53ProdRole.addToPolicy(
-			createPolicyStatementForCDK(infrastructureAccountIds.route53Prod001, "us-east-1")
+			this.createPolicyStatementForCDK(infrastructureAccountIds.route53Prod001, "us-east-1")
 		);
 	}
 }
