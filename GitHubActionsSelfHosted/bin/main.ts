@@ -3,7 +3,7 @@ import * as cdk from "aws-cdk-lib";
 
 import { ImportedCodeConnectionStack } from "../lib/ImportedCodeConnectionStack.js";
 
-import { infrastructureAccountIds } from "kaito-tokyo-aws-common-parameters";
+import { infrastructureAccountIds } from "kaito-tokyo-aws-commonparameters";
 import { CodeBuildSelfHostedRunnerStack } from "../lib/CodeBuildSelfHostedRunnerStack.js";
 import { GitHubActionsSelfHostedBuilderStack } from "../lib/GitHubActionsSelfHostedBuilderStack.js";
 

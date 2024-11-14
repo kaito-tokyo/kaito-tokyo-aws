@@ -2,7 +2,7 @@
 import * as cdk from "aws-cdk-lib";
 import { Route53Stack } from "../lib/Route53Stack.js";
 
-import { infrastructureAccountIds } from "kaito-tokyo-aws-common-parameters";
+import { infrastructureAccountIds } from "kaito-tokyo-aws-commonparameters";
 
 const app = new cdk.App();
 

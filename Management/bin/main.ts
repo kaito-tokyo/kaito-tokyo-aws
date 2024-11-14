@@ -7,7 +7,7 @@ import { ImportedCodeConnectionStack } from "../lib/ImportedCodeConnectionStack.
 import { ImportedControlTowerIdentitiesStack } from "../lib/ImportedControlTowerIdentitiesStack.js";
 import { ManagementBuilderStack } from "../lib/ManagementBuilderStack.js";
 
-import { managementAccountId, identityStoreId } from "kaito-tokyo-aws-common-parameters";
+import { managementAccountId, identityStoreId } from "kaito-tokyo-aws-commonparameters";
 import { IdentityStoreRepository } from "../lib/IdentitystoreRepository.js";
 
 const app = new cdk.App();
