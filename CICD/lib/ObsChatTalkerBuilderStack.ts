@@ -1,9 +1,9 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 
-import { aws_codebuild as codebuild, aws_iam as iam } from "aws-cdk-lib";
+import { aws_codebuild as codebuild } from "aws-cdk-lib";
 
-import { ImportedCodeConnectionStack } from "./ImportedCodeConnectionStack.js";
+import { ImportedCodeConnectionStack } from "kaito-tokyo-aws-commonstacks/ImportedCodeConnectionStack.js";
 
 export interface ObsChatTalkerBuilderStackProps extends cdk.StackProps {
 	readonly importedCodeConnection: ImportedCodeConnectionStack;
@@ -12,22 +12,6 @@ export interface ObsChatTalkerBuilderStackProps extends cdk.StackProps {
 export class ObsChatTalkerBuilderStack extends cdk.Stack {
 	constructor(scope: Construct, id: string, props: ObsChatTalkerBuilderStackProps) {
 		super(scope, id, props);
-
-		const codeConnectionManagedPolicy = new iam.ManagedPolicy(this, "CodeConnectionManagedPolicy", {
-			statements: [
-				new iam.PolicyStatement({
-					effect: iam.Effect.ALLOW,
-					resources: [
-						props.importedCodeConnection.githubCodeConnection.attrConnectionArn
-					],
-					actions: [
-						"codeconnections:GetConnection",
-						"codeconnections:GetConnectionToken",
-						"codeconnections:UseConnection",
-					]
-				})
-			]
-		});
 
 		const project = new codebuild.Project(this, "GitHubActionsSelfHostedBuilderCodeBuildProject", {
 			projectName: "GitHubActionsSelfHostedBuilder",
@@ -46,25 +30,7 @@ export class ObsChatTalkerBuilderStack extends cdk.Stack {
 			concurrentBuildLimit: 1
 		});
 
-		project.role!.addManagedPolicy(codeConnectionManagedPolicy);
-		project.node.addDependency(codeConnectionManagedPolicy);
-
-		project.addToRolePolicy(
-			new iam.PolicyStatement({
-				effect: iam.Effect.ALLOW,
-				resources: ["*"],
-				actions: ["sts:AssumeRole"],
-				conditions: {
-					StringEquals: {
-						"iam:ResourceTag/aws-cdk:bootstrap-role": [
-							"image-publishing",
-							"file-publishing",
-							"deploy",
-							"lookup"
-						]
-					}
-				}
-			})
-		);
+		project.role!.addManagedPolicy(props.importedCodeConnection.codeConnectionManagedPolicy);
+		project.node.addDependency(props.importedCodeConnection.codeConnectionManagedPolicy);
 	}
 }

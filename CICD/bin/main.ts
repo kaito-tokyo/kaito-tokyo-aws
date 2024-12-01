@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 import * as cdk from "aws-cdk-lib";
 
-import { ImportedCodeConnectionStack } from "../lib/ImportedCodeConnectionStack.js";
+import { CICDBuilderStack } from "../lib/CICDBuilderStack.js";
+import { ImportedCodeConnectionStack } from "kaito-tokyo-aws-commonstacks";
+import { ObsChatTalkerBuilderStack } from "../lib/ObsChatTalkerBuilderStack.js";
 
 import { infrastructureAccountIds } from "kaito-tokyo-aws-commonparameters";
-import { CodeBuildSelfHostedRunnerStack } from "../lib/CodeBuildSelfHostedRunnerStack.js";
-import { GitHubActionsSelfHostedBuilderStack } from "../lib/GitHubActionsSelfHostedBuilderStack.js";
 
 const app = new cdk.App();
 
@@ -16,7 +16,7 @@ const importedCodeConnection = new ImportedCodeConnectionStack(app, "ImportedCod
 	}
 });
 
-new GitHubActionsSelfHostedBuilderStack(app, "GitHubActionsSelfHostedBuilderStack", {
+new CICDBuilderStack(app, "CICDBuilderStack", {
 	env: {
 		account: infrastructureAccountIds.gitHubSelfHostedProd001,
 		region: "us-east-1"
@@ -24,7 +24,7 @@ new GitHubActionsSelfHostedBuilderStack(app, "GitHubActionsSelfHostedBuilderStac
 	importedCodeConnection
 });
 
-new CodeBuildSelfHostedRunnerStack(app, "CodeBuildSelfHostedRunnerStack", {
+new ObsChatTalkerBuilderStack(app, "ObsChatTalkerBuilderStack", {
 	env: {
 		account: infrastructureAccountIds.gitHubSelfHostedProd001,
 		region: "us-east-1"
