@@ -6,27 +6,42 @@ import { ImportedCodeConnectionStack } from "kaito-tokyo-aws-commonstacks";
 import { ObsChatTalkerBuilderStack } from "../lib/ObsChatTalkerBuilderStack.js";
 
 import { infrastructureAccountIds, workloadsAccountIds } from "kaito-tokyo-aws-commonparameters";
+import { InfrastructureBuilderStack } from "../lib/InfrastructureBuilderStack.js";
 
 const app = new cdk.App();
 
 const importedCodeConnection = new ImportedCodeConnectionStack(app, "ImportedCodeConnectionStack", {
 	env: {
-		account: infrastructureAccountIds.gitHubSelfHostedProd001,
+		account: infrastructureAccountIds.cicdProd001,
 		region: "us-east-1"
 	}
 });
 
 new CICDBuilderStack(app, "CICDBuilderStack", {
 	env: {
-		account: infrastructureAccountIds.gitHubSelfHostedProd001,
+		account: infrastructureAccountIds.cicdProd001,
 		region: "us-east-1"
 	},
 	importedCodeConnection
 });
 
+new InfrastructureBuilderStack(app, "InfrastructureBuilderStack", {
+	env: {
+		account: infrastructureAccountIds.cicdProd001,
+		region: "us-east-1"
+	},
+	importedCodeConnection,
+	cdkDeployTargetEnrionments: [
+		{
+			account: infrastructureAccountIds.route53Prod001,
+			region: "us-east-1"
+		}
+	]
+});
+
 new ObsChatTalkerBuilderStack(app, "ObsChatTalkerBuilderStack", {
 	env: {
-		account: infrastructureAccountIds.gitHubSelfHostedProd001,
+		account: infrastructureAccountIds.cicdProd001,
 		region: "us-east-1"
 	},
 	importedCodeConnection,

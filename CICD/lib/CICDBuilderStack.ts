@@ -11,7 +11,10 @@ export interface CICDBuilderStackProps extends cdk.StackProps {
 
 export class CICDBuilderStack extends cdk.Stack {
 	constructor(scope: Construct, id: string, props: CICDBuilderStackProps) {
-		super(scope, id, props);
+		super(scope, id, {
+			...props,
+			description: "Manage the CodeBuild project for the CICD account"
+		});
 
 		const project = new codebuild.Project(this, "CICDBuilderCodeBuildProject", {
 			projectName: "CICDBuilder",

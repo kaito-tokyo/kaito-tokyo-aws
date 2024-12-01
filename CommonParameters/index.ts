@@ -1,7 +1,7 @@
 export const managementAccountId = "784179762749";
 
 export const infrastructureAccountIds = {
-	gitHubSelfHostedProd001: "147997151289",
+	cicdProd001: "147997151289",
 	route53Prod001: "913524900670"
 } as const;
 
