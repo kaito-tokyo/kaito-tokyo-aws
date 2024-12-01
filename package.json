@@ -13,9 +13,9 @@
 		"prettier": "^3.3.3"
 	},
 	"workspaces": [
+		"CICD",
 		"CommonParameters",
 		"CommonStacks",
-		"GitHubActionsSelfHosted",
 		"Infrastructure",
 		"L2Constructs",
 		"Management"
