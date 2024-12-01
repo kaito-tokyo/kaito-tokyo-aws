@@ -5,12 +5,12 @@ import { aws_codebuild as codebuild, aws_iam as iam } from "aws-cdk-lib";
 
 import { ImportedCodeConnectionStack } from "./ImportedCodeConnectionStack.js";
 
-export interface GitHubActionsSelfHostedBuilderStackProps extends cdk.StackProps {
+export interface ObsChatTalkerBuilderStackProps extends cdk.StackProps {
 	readonly importedCodeConnection: ImportedCodeConnectionStack;
 }
 
-export class GitHubActionsSelfHostedBuilderStack extends cdk.Stack {
-	constructor(scope: Construct, id: string, props: GitHubActionsSelfHostedBuilderStackProps) {
+export class ObsChatTalkerBuilderStack extends cdk.Stack {
+	constructor(scope: Construct, id: string, props: ObsChatTalkerBuilderStackProps) {
 		super(scope, id, props);
 
 		const codeConnectionManagedPolicy = new iam.ManagedPolicy(this, "CodeConnectionManagedPolicy", {
@@ -18,15 +18,12 @@ export class GitHubActionsSelfHostedBuilderStack extends cdk.Stack {
 				new iam.PolicyStatement({
 					effect: iam.Effect.ALLOW,
 					resources: [
-						props.importedCodeConnection.githubCodeConnection.attrConnectionArn,
-						props.importedCodeConnection.githubCodeStarConnection.attrConnectionArn
+						props.importedCodeConnection.githubCodeConnection.attrConnectionArn
 					],
 					actions: [
 						"codeconnections:GetConnection",
 						"codeconnections:GetConnectionToken",
 						"codeconnections:UseConnection",
-						"codestar-connections:GetConnection",
-						"codestar-connections:GetConnectionToken"
 					]
 				})
 			]
@@ -67,14 +64,6 @@ export class GitHubActionsSelfHostedBuilderStack extends cdk.Stack {
 						]
 					}
 				}
-			})
-		);
-
-		project.addToRolePolicy(
-			new iam.PolicyStatement({
-				effect: iam.Effect.ALLOW,
-				resources: ["*"],
-				actions: ["identitystore:ListUsers"]
 			})
 		);
 	}

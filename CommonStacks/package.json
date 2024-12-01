@@ -1,0 +1,14 @@
+{
+	"name": "kaito-tokyo-aws-commonstacks",
+	"private": true,
+	"version": "0.1.0",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"tsc": "tsc"
+	},
+	"devDependencies": {
+		"aws-cdk-lib": "2.171.1",
+		"constructs": "^10.4.2"
+	}
+}

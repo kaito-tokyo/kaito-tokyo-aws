@@ -8,5 +8,5 @@ phases:
 
   build:
     commands:
-      - "cd GitHubActionsSelfHosted"
+      - "cd $CODEBUILD_SRC_DIR/CICD"
       - "./update.sh"
