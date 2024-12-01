@@ -13,11 +13,11 @@ export class ObsChatTalkerBuilderStack extends cdk.Stack {
 	constructor(scope: Construct, id: string, props: ObsChatTalkerBuilderStackProps) {
 		super(scope, id, props);
 
-		const project = new codebuild.Project(this, "GitHubActionsSelfHostedBuilderCodeBuildProject", {
+		const project = new codebuild.Project(this, "ObsChatTalkerBuilderCodeBuildProject", {
 			projectName: "GitHubActionsSelfHostedBuilder",
 			source: codebuild.Source.gitHub({
 				owner: "kaito-tokyo",
-				repo: "kaito-tokyo-aws",
+				repo: "obs-chattalker",
 				webhook: true,
 				webhookFilters: [
 					codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs("main")
@@ -26,7 +26,7 @@ export class ObsChatTalkerBuilderStack extends cdk.Stack {
 			environment: {
 				buildImage: codebuild.LinuxArmLambdaBuildImage.AMAZON_LINUX_2023_NODE_20
 			},
-			buildSpec: codebuild.BuildSpec.fromSourceFilename("GitHubActionsSelfHosted/buildspec.yml"),
+			buildSpec: codebuild.BuildSpec.fromSourceFilename("buildspec.yml"),
 			concurrentBuildLimit: 1
 		});
 
