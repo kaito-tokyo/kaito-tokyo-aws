@@ -1,5 +1,5 @@
 {
-	"name": "kaito-tokyo-aws-githubactionsselfhosted",
+	"name": "kaito-tokyo-aws-cicd",
 	"version": "0.1.0",
 	"type": "module",
 	"scripts": {
