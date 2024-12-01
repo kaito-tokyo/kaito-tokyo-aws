@@ -8,5 +8,5 @@ phases:
 
   build:
     commands:
-      - "cd Management"
+      - "cd $CODEBUILD_SRC_DIR/Management"
       - "./update.sh"
