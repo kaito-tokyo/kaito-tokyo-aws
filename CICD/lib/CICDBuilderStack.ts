@@ -14,7 +14,7 @@ export class CICDBuilderStack extends cdk.Stack {
 		super(scope, id, props);
 
 		const project = new codebuild.Project(this, "CICDBuilderCodeBuildProject", {
-			projectName: "GitHubActionsSelfHostedBuilder",
+			projectName: "CICDBuilder",
 			source: codebuild.Source.gitHub({
 				owner: "kaito-tokyo",
 				repo: "kaito-tokyo-aws",

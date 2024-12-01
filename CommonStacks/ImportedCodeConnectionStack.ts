@@ -15,11 +15,6 @@ export class ImportedCodeConnectionStack extends cdk.Stack {
 		});
 		this.githubCodeConnection.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN);
 
-		this.githubCodeConnection = new codeconnections.CfnConnection(this, "GitHubCodeConnection", {
-			connectionName: "KaitoTokyoGitHub"
-		});
-		this.githubCodeConnection.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN);
-
 		this.codeConnectionManagedPolicy = new iam.ManagedPolicy(this, "CodeConnectionManagedPolicy", {
 			statements: [
 				new iam.PolicyStatement({
