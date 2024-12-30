@@ -46,5 +46,14 @@ export class Route53Stack extends cdk.Stack {
 			}
 		);
 		obsChatTalkerZone.grantDelegation(apidevObsChatTalkerZoneDelegationRole);
+
+		const kaitoTokyoClickZone = route53.HostedZone.fromHostedZoneAttributes(
+			this,
+			"KaitoTokyoClickZone",
+			{
+				zoneName: "click.kaito.tokyo",
+				hostedZoneId: "Z02227982TKVA5OZ2METT"
+			}
+		);
 	}
 }
