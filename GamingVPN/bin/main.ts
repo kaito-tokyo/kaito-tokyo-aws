@@ -31,7 +31,8 @@ new VpnStack(app, "VpnStack", {
 	env: {
 		account: workloadsAccountIds.gamingVPNProd001,
 		region: "us-east-1"
-	}
+	},
+	certificates
 });
 
 app.synth();
