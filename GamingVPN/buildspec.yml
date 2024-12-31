@@ -8,5 +8,5 @@ phases:
 
   build:
     commands:
-      - "cd $CODEBUILD_SRC_DIR/Infrastructure"
+      - "cd $CODEBUILD_SRC_DIR/GamingVPN"
       - "./update.sh"
