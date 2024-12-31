@@ -16,9 +16,13 @@ export class CertificatesStack extends cdk.Stack {
 	constructor(scope: Construct, id: string, props: CertificatesStackProps) {
 		super(scope, id, props);
 
-		this.ovpnGamingVPNKaitoTokyoCertificate = new acm.Certificate(this, "OvpnGamingVPNKaitoTokyoClickCertificate", {
-			domainName: props.ovpnGamingVPNKaitoTokyoDomainName,
-			validation: acm.CertificateValidation.fromDns(props.hostedZones.apiZone)
-		});
+		this.ovpnGamingVPNKaitoTokyoCertificate = new acm.Certificate(
+			this,
+			"OvpnGamingVPNKaitoTokyoClickCertificate",
+			{
+				domainName: props.ovpnGamingVPNKaitoTokyoDomainName,
+				validation: acm.CertificateValidation.fromDns(props.hostedZones.apiZone)
+			}
+		);
 	}
 }

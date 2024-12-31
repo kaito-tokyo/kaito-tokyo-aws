@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import * as cdk from "aws-cdk-lib";
-import { VPNStack } from "../lib/VPNStack.js";
+import { VpnStack } from "../lib/VpnStack.js";
 
 import { workloadsAccountIds } from "kaito-tokyo-aws-commonparameters";
 import { CertificatesStack } from "../lib/CertificatesStack.js";
@@ -27,7 +27,7 @@ const certificates = new CertificatesStack(app, "CertificatesStack", {
 	ovpnGamingVPNKaitoTokyoDomainName: "ovpn.gamingvpn.kaito-tokyo.click"
 });
 
-new VPNStack(app, "VPNStack", {
+new VpnStack(app, "VpnStack", {
 	env: {
 		account: workloadsAccountIds.gamingVPNProd001,
 		region: "us-east-1"
