@@ -1,0 +1,12 @@
+version: "0.2"
+
+phases:
+  install:
+    commands:
+      - "mkdir -p /tmp/opt/npm/lib"
+      - "npm ci"
+
+  build:
+    commands:
+      - "cd $CODEBUILD_SRC_DIR/Infrastructure"
+      - "./update.sh"
