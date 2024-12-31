@@ -17,7 +17,7 @@ const hostedZones = new HostedZonesStack(app, "HostedZonesStack", {
 	deletationRoleArn: "arn:aws:iam::913524900670:role/route53-delegation/gamingvpn-872515250936",
 	parentHostedZoneName: "kaito-tokyo.click"
 });
-s
+
 const certificates = new CertificatesStack(app, "CertificatesStack", {
 	env: {
 		account: workloadsAccountIds.gamingVPNProd001,
