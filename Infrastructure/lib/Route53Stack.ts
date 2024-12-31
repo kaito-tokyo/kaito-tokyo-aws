@@ -55,6 +55,5 @@ export class Route53Stack extends cdk.Stack {
 				hostedZoneId: "Z02227982TKVA5OZ2METT"
 			}
 		);
-		kaitoTokyoClickZone.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN);
 	}
 }
