@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import * as cdk from "aws-cdk-lib";
-import { VpnStack } from "../lib/VpnStack.js";
 
 import { workloadsAccountIds } from "kaito-tokyo-aws-commonparameters";
 import { CertificatesStack } from "../lib/CertificatesStack.js";
 import { HostedZonesStack } from "../lib/HostedZonesStack.js";
+import { VpnStack } from "../lib/VpnStack.js";
 
 const app = new cdk.App();
 

@@ -5,12 +5,12 @@ import { aws_ec2 as ec2 } from "aws-cdk-lib";
 
 import { CertificatesStack } from "./CertificatesStack.js";
 
-export interface VpcStackProps extends cdk.StackProps {
+export interface VpnStackProps extends cdk.StackProps {
 	readonly certificates: CertificatesStack;
 }
 
-export class VpcStack extends cdk.Stack {
-	constructor(scope: Construct, id: string, props: VpcStackProps) {
+export class VpnStack extends cdk.Stack {
+	constructor(scope: Construct, id: string, props: VpnStackProps) {
 		super(scope, id, props);
 
 		const vpc = new ec2.Vpc(this, "VpnVpc", {
