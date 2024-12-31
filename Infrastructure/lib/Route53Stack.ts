@@ -56,7 +56,6 @@ export class Route53Stack extends cdk.Stack {
 			}
 		);
 
-
 		const gamingVPNKaitoTokyoClickZoneDelegationRole = new iam.Role(
 			this,
 			"GamingVPNKaitoTokyoClickZoneDelegationRole",
@@ -89,6 +88,6 @@ export class Route53Stack extends cdk.Stack {
 				}
 			}
 		);
-		gamingVPNKaitoTokyoClickZoneDelegationRole.grantDelegation(gamingVPNKaitoTokyoClickZoneDelegationRole);
+		kaitoTokyoClickZone.grantDelegation(gamingVPNKaitoTokyoClickZoneDelegationRole);
 	}
 }
