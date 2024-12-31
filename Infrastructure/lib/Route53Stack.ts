@@ -55,5 +55,40 @@ export class Route53Stack extends cdk.Stack {
 				hostedZoneId: "Z02227982TKVA5OZ2METT"
 			}
 		);
+
+
+		const gamingVPNKaitoTokyoClickZoneDelegationRole = new iam.Role(
+			this,
+			"GamingVPNKaitoTokyoClickZoneDelegationRole",
+			{
+				path: "/route53-delegation/",
+				roleName: `gamingvpn-${workloadsAccountIds.gamingVPNProd001}`,
+				assumedBy: new iam.AccountPrincipal(workloadsAccountIds.gamingVPNProd001),
+				inlinePolicies: {
+					crossAccountPolicy: new iam.PolicyDocument({
+						statements: [
+							new iam.PolicyStatement({
+								effect: iam.Effect.ALLOW,
+								resources: ["*"],
+								actions: ["route53:ListHostedZonesByName"]
+							}),
+							new iam.PolicyStatement({
+								effect: iam.Effect.ALLOW,
+								resources: [obsChatTalkerZone.hostedZoneArn],
+								actions: ["route53:GetHostedZone", "route53:ChangeResourceRecordSets"],
+								conditions: {
+									"ForAllValues:StringLike": {
+										"route53:ChangeResourceRecordSetsNormalizedRecordNames": [
+											"gamingvpn.kaito-tokyo.click"
+										]
+									}
+								}
+							})
+						]
+					})
+				}
+			}
+		);
+		gamingVPNKaitoTokyoClickZoneDelegationRole.grantDelegation(gamingVPNKaitoTokyoClickZoneDelegationRole);
 	}
 }
