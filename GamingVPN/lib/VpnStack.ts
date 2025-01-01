@@ -27,5 +27,10 @@ export class VpnStack extends cdk.Stack {
 		endpoint.addAuthorizationRule("Internet", {
 			cidr: "0.0.0.0/24"
 		});
+
+		endpoint.addRoute("DefaultRoute", {
+			cidr: "0.0.0.0/24",
+			target: ec2.ClientVpnRouteTarget.local()
+		});
 	}
 }
