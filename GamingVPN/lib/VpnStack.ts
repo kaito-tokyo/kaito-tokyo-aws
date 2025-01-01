@@ -20,7 +20,8 @@ export class VpnStack extends cdk.Stack {
 		const endpoint = vpc.addClientVpnEndpoint("ClientVpnEndpoint", {
 			cidr: "10.32.0.0/16",
 			serverCertificateArn: props.certificates.ovpnGamingVPNKaitoTokyoCertificate.certificateArn,
-			userBasedAuthentication: ec2.ClientVpnUserBasedAuthentication.federated()
+			clientCertificateArn:
+				props.certificates.umireonOvpnGamingVPNKaitoTokyoCertificate.certificateArn
 		});
 	}
 }
