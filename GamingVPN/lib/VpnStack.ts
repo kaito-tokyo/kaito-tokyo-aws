@@ -23,5 +23,16 @@ export class VpnStack extends cdk.Stack {
 			clientCertificateArn:
 				props.certificates.umireonOvpnGamingVPNKaitoTokyoCertificate.certificateArn
 		});
+
+		endpoint.addAuthorizationRule("Internet", {
+			cidr: "0.0.0.0/24"
+		});
+
+		for (const [index, subnet] of vpc.publicSubnets.entries()) {
+			endpoint.addRoute(`default-route-${index}`, {
+				cidr: "0.0.0.0/24",
+				target: ec2.ClientVpnRouteTarget.subnet(subnet)
+			});
+		}
 	}
 }
