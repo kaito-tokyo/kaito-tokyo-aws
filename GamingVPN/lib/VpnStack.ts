@@ -17,6 +17,10 @@ export class VpnStack extends cdk.Stack {
 			ipAddresses: ec2.IpAddresses.cidr("10.23.0.0/16")
 		});
 
+		const publicSubnet = new ec2.Subnet(this, "VpnPublicSubnet", {
+
+		})
+
 		const endpoint = vpc.addClientVpnEndpoint("ClientVpnEndpoint", {
 			cidr: "10.32.0.0/16",
 			serverCertificateArn: props.certificates.ovpnGamingVPNKaitoTokyoCertificate.certificateArn,
@@ -27,12 +31,5 @@ export class VpnStack extends cdk.Stack {
 		endpoint.addAuthorizationRule("Internet", {
 			cidr: "0.0.0.0/24"
 		});
-
-		for (const [index, subnet] of vpc.publicSubnets.entries()) {
-			endpoint.addRoute(`default-route-${index}`, {
-				cidr: "0.0.0.0/24",
-				target: ec2.ClientVpnRouteTarget.subnet(subnet)
-			});
-		}
 	}
 }
