@@ -28,9 +28,9 @@ export class VpnStack extends cdk.Stack {
 			cidr: "0.0.0.0/24"
 		});
 
-		endpoint.addRoute("DefaultRoute", {
-			cidr: "0.0.0.0/24",
-			target: ec2.ClientVpnRouteTarget.local()
+		endpoint.addRoute("PublicSubnet", {
+			cidr: "0.0.0.0/0",
+			target: ec2.ClientVpnRouteTarget.subnet(vpc.publicSubnets[0]!)
 		});
 	}
 }
