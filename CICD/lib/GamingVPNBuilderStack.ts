@@ -26,7 +26,7 @@ export class GamingVPNBuilderStack extends cdk.Stack {
 			projectName: "GamingVPNBuilder",
 			source: codebuild.Source.gitHub({
 				owner: "kaito-tokyo",
-				repo: "kaito-tokyo-aws",
+				repo: "gamingvpn.kaito-tokyo.click",
 				webhook: true,
 				webhookFilters: [
 					codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs("main")
