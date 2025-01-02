@@ -35,7 +35,7 @@ export class GamingVPNBuilderStack extends cdk.Stack {
 			environment: {
 				buildImage: codebuild.LinuxArmLambdaBuildImage.AMAZON_LINUX_2023_NODE_20
 			},
-			buildSpec: codebuild.BuildSpec.fromSourceFilename("GamingVPN/buildspec.yml"),
+			buildSpec: codebuild.BuildSpec.fromSourceFilename("buildspec.yml"),
 			concurrentBuildLimit: 1,
 			role
 		});
