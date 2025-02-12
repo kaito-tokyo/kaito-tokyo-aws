@@ -8,7 +8,7 @@
 		"tsc": "tsc"
 	},
 	"devDependencies": {
-		"aws-cdk-lib": "2.171.1",
+		"aws-cdk-lib": "2.177.0",
 		"constructs": "^10.4.2"
 	}
 }
