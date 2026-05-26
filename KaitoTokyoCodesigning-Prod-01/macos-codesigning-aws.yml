@@ -1,0 +1,156 @@
+# SPDX-FileCopyrightText: 2026 Kaito Udagawa <umireon@kaito.tokyo>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS KMS keys and GitHub Actions OIDC role for macOS Developer ID code signing.
+
+Parameters:
+  GitHubOidcProviderArn:
+    Type: String
+    Description: Existing GitHub OIDC provider ARN. Leave empty to create one in this stack.
+    Default: ''
+
+Conditions:
+  CreateGitHubOidcProvider: !Equals [!Ref GitHubOidcProviderArn, '']
+
+Resources:
+  GitHubOidcProvider:
+    Type: AWS::IAM::OIDCProvider
+    Condition: CreateGitHubOidcProvider
+    Properties:
+      Url: https://token.actions.githubusercontent.com
+      ClientIdList:
+        - sts.amazonaws.com
+      ThumbprintList:
+        - 6938fd4d98bab03faadb97b34396831e3780aea1
+        - 1c58a3a8518e8759bf075b76b750d4f2df264fcd
+
+  DeveloperIdApplicationKey:
+    Type: AWS::KMS::Key
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      Description: Developer ID Application signing key for Kaito.tokyo.
+      Enabled: true
+      KeySpec: RSA_3072
+      KeyUsage: SIGN_VERIFY
+      MultiRegion: false
+      PendingWindowInDays: 30
+      Tags:
+        - Key: Owner
+          Value: kaito-tokyo
+        - Key: Purpose
+          Value: developer-id-application
+      KeyPolicy:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: EnableIamPermissions
+            Effect: Allow
+            Principal:
+              AWS: !Sub arn:${AWS::Partition}:iam::${AWS::AccountId}:root
+            Action: kms:*
+            Resource: '*'
+
+  DeveloperIdApplicationAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: alias/kaito-tokyo/developer-id-application
+      TargetKeyId: !Ref DeveloperIdApplicationKey
+
+  DeveloperIdInstallerKey:
+    Type: AWS::KMS::Key
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      Description: Developer ID Installer signing key for Kaito.tokyo.
+      Enabled: true
+      KeySpec: RSA_3072
+      KeyUsage: SIGN_VERIFY
+      MultiRegion: false
+      PendingWindowInDays: 30
+      Tags:
+        - Key: Owner
+          Value: kaito-tokyo
+        - Key: Purpose
+          Value: developer-id-installer
+      KeyPolicy:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: EnableIamPermissions
+            Effect: Allow
+            Principal:
+              AWS: !Sub arn:${AWS::Partition}:iam::${AWS::AccountId}:root
+            Action: kms:*
+            Resource: '*'
+
+  DeveloperIdInstallerAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: alias/kaito-tokyo/developer-id-installer
+      TargetKeyId: !Ref DeveloperIdInstallerKey
+
+  GitHubActionsCodeSigningRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub kaito-tokyo-macos-codesigning-${AWS::Region}
+      Description: GitHub Actions role for Kaito.tokyo AWS KMS-backed macOS code signing.
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !If
+                - CreateGitHubOidcProvider
+                - !Ref GitHubOidcProvider
+                - !Ref GitHubOidcProviderArn
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                token.actions.githubusercontent.com:aud: sts.amazonaws.com
+                token.actions.githubusercontent.com:sub:
+                  - repo:kaito-tokyo/live-streamer-applet:environment:production-macos
+
+  GitHubActionsCodeSigningPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: macos-codesigning-kms
+      Roles:
+        - !Ref GitHubActionsCodeSigningRole
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: UseDeveloperIdSigningKeys
+            Effect: Allow
+            Action:
+              - kms:DescribeKey
+              - kms:GetPublicKey
+              - kms:Sign
+            Resource:
+              - !GetAtt DeveloperIdApplicationKey.Arn
+              - !GetAtt DeveloperIdInstallerKey.Arn
+
+Outputs:
+  AwsAccountId:
+    Description: Set this account ID as AWS_ACCOUNT_ID in GitHub Actions.
+    Value: !Ref AWS::AccountId
+
+  GitHubActionsCodeSigningRoleArn:
+    Description: Set this ARN as AWS_ROLE_TO_ASSUME in GitHub Actions.
+    Value: !GetAtt GitHubActionsCodeSigningRole.Arn
+
+  DeveloperIdApplicationKeyArn:
+    Description: AWS KMS key ARN for Developer ID Application signing.
+    Value: !GetAtt DeveloperIdApplicationKey.Arn
+
+  DeveloperIdApplicationKeyAlias:
+    Description: AWS KMS key alias for Developer ID Application signing.
+    Value: !Ref DeveloperIdApplicationAlias
+
+  DeveloperIdInstallerKeyArn:
+    Description: AWS KMS key ARN for Developer ID Installer signing.
+    Value: !GetAtt DeveloperIdInstallerKey.Arn
+
+  DeveloperIdInstallerKeyAlias:
+    Description: AWS KMS key alias for Developer ID Installer signing.
+    Value: !Ref DeveloperIdInstallerAlias
